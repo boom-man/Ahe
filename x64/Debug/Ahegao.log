@@ -1,0 +1,20 @@
+﻿  boss.cpp
+  main.cpp
+C:\Users\wlals\source\repos\Ahegao\Ahegao\boss.cpp(27,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\boss.cpp(27,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\boss.cpp(27,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\boss.cpp(27,20): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(49,19): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  map.cpp
+  Mapstyle0.cpp
+C:\Users\wlals\source\repos\Ahegao\Ahegao\Mapstyle0.cpp(14,80): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\Mapstyle0.cpp(14,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\Mapstyle0.cpp(14,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\Mapstyle0.cpp(14,26): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  player.cpp
+C:\Users\wlals\source\repos\Ahegao\Ahegao\player.cpp(35,44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\player.cpp(35,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\player.cpp(35,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\player.cpp(35,20): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  Ahegao.vcxproj -> C:\Users\wlals\source\repos\Ahegao\x64\Debug\Ahegao.exe
