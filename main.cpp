@@ -57,7 +57,7 @@ void GameInit() {
 
 void GameUpdate(HWND hwnd) {
     player.Update();  // 플레이어 업데이트
-    boss.Update();    // 보스 업데이트
+    boss.Update(player);    // 보스 업데이트
     map.Update();     //맵 업데이트
     // 게임 상태 업데이트 (충돌 감지, 아이템 획득 등)
 }
