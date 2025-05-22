@@ -13,39 +13,112 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="헤더 파일\map">
+      <UniqueIdentifier>{06b837b7-0060-47fa-a22b-26cac9be769f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\map">
+      <UniqueIdentifier>{edaa69a2-d01d-4fc7-975a-7a694d472393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\boss">
+      <UniqueIdentifier>{0ce0acfb-0c2d-4b28-9d1f-f906cbe84df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\boss">
+      <UniqueIdentifier>{9ddc9468-dfb4-41a5-91ff-27353910feaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\Yong">
+      <UniqueIdentifier>{4af5d2a3-5403-4a27-9b36-0aeb8ec31aaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="boss.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Mapstyle0.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Mapstyle0.cpp">
+      <Filter>소스 파일\map</Filter>
+    </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>소스 파일\map</Filter>
+    </ClCompile>
+    <ClCompile Include="spike.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="spikemanager.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="yong.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="boss.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Mapstyle.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="mapstyle0.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Mapstyle.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="mapstyle0.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="spikemanager.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ahegao.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0001.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0002.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0003.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0004.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0005.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0006.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0007.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0008.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0009.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0010.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0011.bmp">
+      <Filter>리소스 파일\Yong</Filter>
+    </Image>
   </ItemGroup>
 </Project>

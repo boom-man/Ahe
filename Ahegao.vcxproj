@@ -24,6 +24,9 @@
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Mapstyle0.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="spike.cpp" />
+    <ClCompile Include="spikemanager.cpp" />
+    <ClCompile Include="yong.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="boss.h" />
@@ -31,6 +34,25 @@
     <ClInclude Include="Mapstyle.h" />
     <ClInclude Include="mapstyle0.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Spike.h" />
+    <ClInclude Include="spikemanager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Ahegao.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0001.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0002.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0003.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0004.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0005.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0006.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0007.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0008.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0009.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0010.bmp" />
+    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0011.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

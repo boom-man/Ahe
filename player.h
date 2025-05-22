@@ -1,7 +1,8 @@
 #pragma once
 #include <windows.h>
-#define xx 800
-#define yy 600
+#define PI 3.14159f
+#define xx = 800
+#define yy = 600
 class Player {
 public:
     Player();
