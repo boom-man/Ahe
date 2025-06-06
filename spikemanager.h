@@ -8,27 +8,38 @@ public:
     static const int MAX_SPIKES = 1000;
 
     Spike spikes[MAX_SPIKES];
-    Yong yong;
-    int spikeCount;
+    Yong yong[30];
+    SpikeZone spikezone[10];
+    int spikeCount, yongcount, lineattackstart, attackstyle;
     float speed;
     int Level;
     SpikeManager();
 
     void Update(const Boss& boss, const Player& player);
-    void SpawnManager(const Boss& boss, const Player& player, int timecount);
-    void Draw(HDC hdc);
+    void SpawnManager(HBITMAP Yong[], int w[], int h[],
+        const Boss& boss, const Player& player, int timecount);
+    void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]);
 
     // 스파이크 패턴들
-    void SpawnCross(float centerX, float centerY);
-    void SpawnXShape(float centerX, float centerY);
-    void SinglePointSpikes(float centerX, float centerY, float targetX, float targetY);
+    void SpawnCross(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY); // 완
+    void SpawnXShape(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY); // 완
+    void SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY, float targetX, float targetY); // 완
 
-    void OrbitingAttack(float centerX, float centerY);
+    void OrbitingAttack(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY); // 미완
 
-    void WideAreaSpikes(float startX, float startgap, float spawn, float during);
+    void WideAreaSpikes(HBITMAP Yong[], int w[], int h[],
+        float startX, float startgap, float spawn, float during); // 완
 
-    void PeripheralSpikes(float centerX, float centerY);
-    void RandomOrbitSpikes(float centerX, float centerY);
-    void OrbitTimeAttack(float centerX, float centerY);
-    void TrackingOrbAttack(float centerX, float centerY);
+    void PeripheralSpikes(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY); // 완
+    void RandomOrbitSpikes(HBITMAP Yong[], int w[], int h[],
+        float angle, float centerX, float centerY, float radius, int currentFrame); // 미완
+    void OrbitTimeAttack(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY, int timecount, int lineattackstart); // 완
+    void TrackingOrbAttack(HBITMAP Yong[], int w[], int h[],
+        float centerX, float centerY); // 미완
 }; 

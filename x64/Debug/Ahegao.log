@@ -1,3 +1,4 @@
-﻿  main.cpp
-C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(52,19): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  spike.cpp
+C:\Users\wlals\source\repos\Ahegao\Ahegao\spike.cpp(56,39): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\spike.cpp(56,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Ahegao.vcxproj -> C:\Users\wlals\source\repos\Ahegao\x64\Debug\Ahegao.exe

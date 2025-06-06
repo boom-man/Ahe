@@ -16,7 +16,7 @@ void Map::Update() {
         style->Update();
 }
 
-void Map::Draw(HDC hdc) {
+void Map::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong, HBITMAP OldBit[], int w, int h) {
     if (style)
-        style->Draw(hdc);
+        style->Draw(hdc, hMemDC,Yong,OldBit, w,h);
 }

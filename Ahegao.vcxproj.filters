@@ -54,6 +54,12 @@
     <ClCompile Include="yong.cpp">
       <Filter>소스 파일\boss</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Spikezone.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -80,6 +86,9 @@
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Ahegao.rc">
@@ -87,38 +96,50 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0001.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\Circle2Item.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0002.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\Circle3Item.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0003.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\CircleItem.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0004.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\NeonCircle.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0005.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\NeonCircle2.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0006.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\NeonCircle3.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0007.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\StaminaBmp.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0008.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\StaminaItemBit.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0009.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\map\네온원.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0010.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\attack\Boss.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0011.bmp">
-      <Filter>리소스 파일\Yong</Filter>
+    <Image Include="res\attack\Spike.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\MuckBoss.bmp">
+      <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
 </Project>

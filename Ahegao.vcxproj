@@ -20,16 +20,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="boss.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Mapstyle0.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="spike.cpp" />
     <ClCompile Include="spikemanager.cpp" />
+    <ClCompile Include="Spikezone.cpp" />
     <ClCompile Include="yong.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="boss.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Mapstyle.h" />
     <ClInclude Include="mapstyle0.h" />
@@ -42,17 +45,21 @@
     <ResourceCompile Include="Ahegao.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0001.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0002.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0003.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0004.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0005.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0006.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0007.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0008.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0009.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0010.bmp" />
-    <Image Include="..\..\..\..\Desktop\오리\윈플\그림\얼음\공격\Infernado_(friendly)-0011.bmp" />
+    <Image Include="res\attack\Boss.bmp" />
+    <Image Include="res\attack\MuckBoss.bmp" />
+    <Image Include="res\attack\Spike.bmp" />
+    <Image Include="res\attack\Spike2.bmp" />
+    <Image Include="res\attack\Spike3.bmp" />
+    <Image Include="res\attack\Spike4.bmp" />
+    <Image Include="res\map\Circle2Item.bmp" />
+    <Image Include="res\map\Circle3Item.bmp" />
+    <Image Include="res\map\CircleItem.bmp" />
+    <Image Include="res\map\NeonCircle.bmp" />
+    <Image Include="res\map\NeonCircle2.bmp" />
+    <Image Include="res\map\NeonCircle3.bmp" />
+    <Image Include="res\map\StaminaBmp.bmp" />
+    <Image Include="res\map\StaminaItemBit.bmp" />
+    <Image Include="res\map\네온원.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

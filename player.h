@@ -1,21 +1,25 @@
 #pragma once
 #include <windows.h>
-#define PI 3.14159f
-#define xx = 800
-#define yy = 600
+#define xx 1920
+#define yy 1080
 class Player {
 public:
     Player();
-    void Init(float startX, float startY, int startHealth);
+    void Init(float startX, float startY, int startHealth, int StaminaP);
     void SetSpeed(float speed);
     void Update();
-    void Draw(HDC hdc);
+    void Draw(HDC hdc, HBITMAP hbit, HBITMAP OldBit[], int PH, int PW);
     void ActivateInvincibility();
     bool Dash;
-    float x, y, speed;
+    int StaminaP, mapMove;
+    float speed, health;;
+    float x, y, centerX,centerY;
+    float GetX() const;
+    float GetY() const;
+    int GetRadius() const; // 플레이어 크기에 따라 반지름 반환
+    bool IsInvincible() const; // 필요 시 무적 여부 확인
 private:
     static void CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);  // static 멤버 함수 선언
 
-    int health;
     bool invincible;
 };

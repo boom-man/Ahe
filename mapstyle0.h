@@ -7,5 +7,5 @@ private:
 public:
     void Init(float startX, float startY, float startRadius) override;
     void Update() override;
-    void Draw(HDC hdc) override;
+    void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong, HBITMAP OldBit[], int w, int h) override;
 };

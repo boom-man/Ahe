@@ -10,5 +10,5 @@ public:
     void SetStyle(MapStyle* newStyle); // 스타일 설정
     void Init(float x, float y, float r); // 초기화
     void Update();
-    void Draw(HDC hdc);
+    void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong, HBITMAP OldBit[], int w, int h);
 };

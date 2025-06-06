@@ -9,21 +9,16 @@ public:
     HBITMAP hBitmap;
     HDC hMemDC;
     int bitcount;
+    int page, Level;
 
-    bool isGroggy, patterning;  // 그로기 상태
-    int health;
+    bool isGroggy,Groggy_ing, lineattack;  // 그로기 상태
+    int health, lineattackstart;
     Boss();
-    void Init(float startX, float startY, int startHealth);
+    void Init(float startX, float startY, int startHealth, int LV);
     void Update(const Player&player,int timecount);
     void Attack(int timecount);
-    void Draw(HDC hdc);
-    void CrossSpikes();
-    void XShapedSpikes();
-    void SinglePointSpikes();
-    void OrbitingAttack();
-    void WideAreaSpikes();
-    void PeripheralSpikes();
-    void RandomOrbitSpikes();
-    void OrbitTimeAttack();
-    void TrackingOrbAttack();
+    void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong, HBITMAP OldBit[], int w, int h);
+    void CenternMove();
+    void LoopingMove();
+    void FourMove(int timecount);
 };
