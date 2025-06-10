@@ -1,4 +1,5 @@
-#include "player.h"
+ï»¿#include "player.h"
+#include "boss.h"
 #include <windows.h>
 #include <cmath>
 #pragma comment (lib, "msimg32.lib")
@@ -9,55 +10,70 @@ void Player::Init(float startX, float startY, int startHealth, int Stamina) {
     y = startY;
     health = startHealth;
     StaminaP = Stamina;
+    invincible = false;
 }
 void Player::SetSpeed(float P_speed) {
     speed = P_speed;
 }
-void Player::Update() {
-    // ½Ã°£¿¡ µû¸¥ °¢µµ °è»ê
+void Player::Update(Boss& boss) {
+    if (delay > 0) {
+        delay--;
+    }
+    // ì‹œê°„ì— ë”°ë¥¸ ê°ë„ ê³„ì‚°
     if (Dash) {
         if (StaminaP > 0) {
-            StaminaP--;  // ÀÏÁ¤ ¼Óµµ·Î °¨¼Ò
+            StaminaP--;  // ì¼ì • ì†ë„ë¡œ ê°ì†Œ
         }
         else {
             Dash = FALSE;
-            speed /= 5.0f;     // Dash ÇØÁ¦ ½Ã ¿ø·¡ ¼Óµµ·Î º¹±Í
+            speed /= 5.0f;     // Dash í•´ì œ ì‹œ ì›ë˜ ì†ë„ë¡œ ë³µê·€
             SetSpeed(speed);
         }
     }
+    // íŠ•ê¹€ ì²˜ë¦¬
+    if (bounced) {
+        float t = 1.0f - (float)bounceTimer / 10.0f; // 0 ~ 1
+        speed = originalspeed * t + (-2.0f * originalspeed) * (1 - t);  // Lerp
+
+        if (--bounceTimer <= 0) {
+            speed = originalspeed;  // ì •í™•íˆ ë³µì›
+            bounced = false;
+        }
+    }
+
     static float angle;
     angle += speed * 3.14159f / 180.0f;
-
-    if (angle >= 2 * 3.14159f) angle -= 2 * 3.14159f;//°¢µµ¸¦ 360µµ ¹üÀ§·Î À¯Áö
-    if (angle < 0) angle += 2 * 3.14159f;//°¢µµ¸¦ 360µµ ¹üÀ§·Î À¯Áö
+    anglez = angle;
+    if (angle >= 2 * 3.14159f) angle -= 2 * 3.14159f;//ê°ë„ë¥¼ 360ë„ ë²”ìœ„ë¡œ ìœ ì§€
+    if (angle < 0) angle += 2 * 3.14159f;//ê°ë„ë¥¼ 360ë„ ë²”ìœ„ë¡œ ìœ ì§€
 
     if (mapMove == 0)
     {
-        // »ó¹İºÎ (0 < ¥è < ¥ğ): ¿ŞÂÊ Áß½É (350, 400)
-        // ÇÏ¹İºÎ (¥ğ < ¥è < 2¥ğ): ¿À¸¥ÂÊ Áß½É (450, 400)
-        centerX = xx / 2; // ¿ø ±Ëµµ Áß½É X = ¸Ê Áß°£
-        centerY = yy / 2;  // ¿ø ±Ëµµ Áß½É Y = ¸Ê Áß°£
+        // ìƒë°˜ë¶€ (0 < Î¸ < Ï€): ì™¼ìª½ ì¤‘ì‹¬ (350, 400)
+        // í•˜ë°˜ë¶€ (Ï€ < Î¸ < 2Ï€): ì˜¤ë¥¸ìª½ ì¤‘ì‹¬ (450, 400)
+        centerX = xx / 2; // ì› ê¶¤ë„ ì¤‘ì‹¬ X = ë§µ ì¤‘ê°„
+        centerY = yy / 2;  // ì› ê¶¤ë„ ì¤‘ì‹¬ Y = ë§µ ì¤‘ê°„
 
-        // °¢µµ¿¡ µû¶ó x, y ÁÂÇ¥ °è»ê
-        x = cos(angle) * 350 + centerX;  // ¿ø ±Ëµµ¿¡¼­ x ÁÂÇ¥ °è»ê
-        y = sin(angle) * 350 + centerY;  // ¿ø ±Ëµµ¿¡¼­ y ÁÂÇ¥ °è»ê
+        // ê°ë„ì— ë”°ë¼ x, y ì¢Œí‘œ ê³„ì‚°
+        x = cos(angle) * 350 + centerX;  // ì› ê¶¤ë„ì—ì„œ x ì¢Œí‘œ ê³„ì‚°
+        y = sin(angle) * 350 + centerY;  // ì› ê¶¤ë„ì—ì„œ y ì¢Œí‘œ ê³„ì‚°
     }
 
     else if (mapMove == 1)
     {
 
-        static int centerState = 0;  // 0: ¿À¸¥ÂÊ Áß½É (825), 1: ¿ŞÂÊ Áß½É (1225)
+        static int centerState = 0;  // 0: ì˜¤ë¥¸ìª½ ì¤‘ì‹¬ (825), 1: ì™¼ìª½ ì¤‘ì‹¬ (1225)
         static float prevAngle = 0;
 
-        // Áß½É ÀüÈ¯ Á¶°Ç (ÇÑÂÊ¿¡¼­ ¹İ´ëÆíÀ¸·Î ³Ñ¾î°¥ ¶§¸¸)
+        // ì¤‘ì‹¬ ì „í™˜ ì¡°ê±´ (í•œìª½ì—ì„œ ë°˜ëŒ€í¸ìœ¼ë¡œ ë„˜ì–´ê°ˆ ë•Œë§Œ)
         if (prevAngle < 3.14159f && angle >= 3.14159f) {
-            centerState = 1;  // ¿À¸¥ÂÊ ¡æ ¿ŞÂÊ
+            centerState = 1;  // ì˜¤ë¥¸ìª½ â†’ ì™¼ìª½
         }
         else if (prevAngle >= 3.14159f && angle < 3.14159f) {
-            centerState = 0;  // ¿ŞÂÊ ¡æ ¿À¸¥ÂÊ
+            centerState = 0;  // ì™¼ìª½ â†’ ì˜¤ë¥¸ìª½
         }
 
-        prevAngle = angle;  // ´ÙÀ½ ÇÁ·¹ÀÓÀ» À§ÇÑ ±â·Ï
+        prevAngle = angle;  // ë‹¤ìŒ í”„ë ˆì„ì„ ìœ„í•œ ê¸°ë¡
 
         centerX = (centerState == 0) ? 1225 : 825;
         centerY = yy / 2;
@@ -74,18 +90,18 @@ void Player::Update() {
         float halfPi = pi / 2;
         float twoPi = 2 * pi;
 
-        static float angle2 = 0;       // µ¶¸³µÈ °¢µµ º¯¼ö
+        static float angle2 = 0;       // ë…ë¦½ëœ ê°ë„ ë³€ìˆ˜
         static float prevAngle = 0;
         static int quadrant = 1;
         static bool initialized = false;
 
         angle2 += speed * pi / 180.0f;
 
-        // °¢µµ ¹üÀ§ Á¤±ÔÈ­
+        // ê°ë„ ë²”ìœ„ ì •ê·œí™”
         if (angle2 >= twoPi) angle2 -= twoPi;
         if (angle2 < 0) angle2 += twoPi;
 
-        // ÃÖÃÊ ÃÊ±â quadrant ¼³Á¤
+        // ìµœì´ˆ ì´ˆê¸° quadrant ì„¤ì •
         if (!initialized) {
             if (angle2 < halfPi) quadrant = 1;
             else if (angle2 < pi) quadrant = 2;
@@ -94,14 +110,14 @@ void Player::Update() {
             initialized = true;
         }
 
-        //¹æÇâ¿¡ µû¶ó quadrant ÀüÈ¯
-        if (speed > 0) {  // ½Ã°è¹æÇâ
+        //ë°©í–¥ì— ë”°ë¼ quadrant ì „í™˜
+        if (speed > 0) {  // ì‹œê³„ë°©í–¥
             if (prevAngle < halfPi && angle2 >= halfPi && angle2 < pi) quadrant = 2;
             else if (prevAngle < pi && angle2 >= pi && angle2 < 3 * halfPi) quadrant = 3;
             else if (prevAngle < 3 * halfPi && angle2 >= 3 * halfPi && angle2 < twoPi) quadrant = 4;
             else if (prevAngle < twoPi && angle2 < halfPi && angle2 < prevAngle) quadrant = 1;
         }
-        else {  // ¹İ½Ã°è¹æÇâ
+        else {  // ë°˜ì‹œê³„ë°©í–¥
             if (prevAngle > halfPi && angle2 <= halfPi && angle2 > 0) quadrant = 1;
             else if (prevAngle > pi && angle2 <= pi && angle2 > halfPi) quadrant = 2;
             else if (prevAngle > 3 * halfPi && angle2 <= 3 * halfPi && angle2 > pi) quadrant = 3;
@@ -110,7 +126,7 @@ void Player::Update() {
 
         prevAngle = angle2;
 
-        //Áß½É ÁÂÇ¥ ¼³Á¤
+        //ì¤‘ì‹¬ ì¢Œí‘œ ì„¤ì •
         switch (quadrant) {
         case 1: centerX = 1092; break;
         case 2: centerX = 826; break;
@@ -124,37 +140,53 @@ void Player::Update() {
         x = cos(angle2) * radius + centerX;
         y = sin(angle2) * radius + centerY;
     }
-
-
+    
+    // ğŸ§  ê·¸ë¡œê¸° ìƒíƒœì¼ ë•Œ ê°ë„ ì²´í¬ â†’ íŠ•ê¸°ê³  ë°ë¯¸ì§€
+    if (boss.isGroggy && !bounced) {
+        if (angle < boss.groggyAngle + 0.16f && angle > boss.groggyAngle - 0.16) {
+            if (Dash) {
+                Dash = false;
+                speed /= 5.0f;
+            }
+            originalspeed = speed; // íŠ•ê¸°ê¸° ì§ì „ì˜ ê°’=
+            speed = -2 * speed;
+            bounceTimer = 10;
+            bounced = true;
+        }
+    }
+    if (!boss.isGroggy && boss.groggyAngle != 0) {
+        if (angle < boss.groggyAngle + 0.16f && angle > boss.groggyAngle - 0.16) {
+            OutputDebugString(L"!!! í”Œë ˆì´ì–´ ìœ„í—˜êµ¬ì—­ ì§„ì… !!!\n");
+        }
+    }
 }
 
 
 void Player::Draw(HDC hdc, HBITMAP hbit, HBITMAP OldBit[], int PH, int PW) {
     HDC hdcmem;
-    // Ellipse(hdc, x - 10, y - 10, x + 10, y + 10);  // 10Àº ÇÃ·¹ÀÌ¾î Å©±â
+    // Ellipse(hdc, x - 10, y - 10, x + 10, y + 10);  // 10ì€ í”Œë ˆì´ì–´ í¬ê¸°
     hdcmem = CreateCompatibleDC(hdc);
     SelectObject(hdcmem, hbit);
     TransparentBlt(hdc, x - 10, y - 10, 20, 20, hdcmem, 0, 0, PW, PH, RGB(0, 6, 22));
     //RGB(238,240, 239)
 
     DeleteDC(hdcmem);
-
 }
 
 void Player::ActivateInvincibility() {
     invincible = true;
-    // ÀÏÁ¤ ½Ã°£ ÈÄ ¹«Àû ÇØÁ¦ (5ÃÊ ÈÄ)
-    SetTimer(NULL, reinterpret_cast<UINT_PTR>(this), 5000, &Player::TimerProc);  // static ¸â¹ö ÇÔ¼ö »ç¿ë
+    // ì¼ì • ì‹œê°„ í›„ ë¬´ì  í•´ì œ (5ì´ˆ í›„)
+    SetTimer(NULL, reinterpret_cast<UINT_PTR>(this), 5000, &Player::TimerProc);  // static ë©¤ë²„ í•¨ìˆ˜ ì‚¬ìš©
 }
 
-// static ¸â¹ö ÇÔ¼ö Á¤ÀÇ
+// static ë©¤ë²„ í•¨ìˆ˜ ì •ì˜
 void CALLBACK Player::TimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
-    Player* player = reinterpret_cast<Player*>(idEvent);  // idEvent¿¡ Àü´ŞµÈ 'this' Æ÷ÀÎÅÍ¸¦ »ç¿ë
+    Player* player = reinterpret_cast<Player*>(idEvent);  // idEventì— ì „ë‹¬ëœ 'this' í¬ì¸í„°ë¥¼ ì‚¬ìš©
     if (player) {
-        player->invincible = false;  // ¹«Àû ÇØÁ¦
+        player->invincible = false;  // ë¬´ì  í•´ì œ
     }
 
-    KillTimer(hwnd, idEvent);  // Å¸ÀÌ¸Ó ÇØÁ¦
+    KillTimer(hwnd, idEvent);  // íƒ€ì´ë¨¸ í•´ì œ
 }
 
 float Player::GetX() const {
@@ -166,10 +198,9 @@ float Player::GetY() const {
 }
 
 int Player::GetRadius() const {
-    return 20;  // ÇÃ·¹ÀÌ¾î ¹İÁö¸§, Draw¿¡¼­ 20x20 »ç¿ëÇÏ¹Ç·Î ¹İÁö¸§Àº 10
+    return 20;  // í”Œë ˆì´ì–´ ë°˜ì§€ë¦„, Drawì—ì„œ 20x20 ì‚¬ìš©í•˜ë¯€ë¡œ ë°˜ì§€ë¦„ì€ 10
 }
 
 bool Player::IsInvincible() const {
     return invincible;
 }
-

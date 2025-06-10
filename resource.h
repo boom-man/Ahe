@@ -14,23 +14,34 @@
 #define IDB_BITMAP7                     118
 #define IDB_BITMAP8                     119
 #define IDB_BITMAP9                     120
-
 #define IDB_BITMAP10                    121
 #define IDB_BITMAP11                    122
 #define IDB_BITMAP12                    123
+#define LV2_SPIKE1                      124
+#define LV2_SPIKE2                      125
+#define LV2_SPIKE3                      126
+#define LV2_SPIKE4                      127
+#define LV2_SPIKE5                      128
+#define LV2_SPIKE6                      129
+#define LV1_SPIKE1                      131
+#define LV1_SPIKE2                      132
+#define LV1_SPIKE3                      133
+#define IDB_BITMAP13                    134
+#define IDB_BITMAP14                    135
 
-#define LV2_SPIKE1                    124
-#define LV2_SPIKE2                    125
-#define LV2_SPIKE3                    126
-#define LV2_SPIKE4                    127
-#define LV2_SPIKE5                    128
-#define LV2_SPIKE6                    129
+#define IDB_BITMAP15                    136
+#define IDB_BITMAP16                    137
+#define IDB_BITMAP17                    138
+#define IDB_BITMAP18                    139
+#define IDB_BITMAP19                    140
+#define IDB_BITMAP20                    141
+#define IDB_BITMAP21                    142
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        131
+#define _APS_NEXT_RESOURCE_VALUE        143
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           104

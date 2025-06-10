@@ -1,4 +1,12 @@
-﻿  spike.cpp
-C:\Users\wlals\source\repos\Ahegao\Ahegao\spike.cpp(56,39): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\wlals\source\repos\Ahegao\Ahegao\spike.cpp(56,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  main.cpp
+C:\Users\wlals\source\repos\Ahegao\Ahegao\SpikeManager.h(4,9): warning C4005: 'DEG2RAD': 매크로 재정의
+  (소스 파일 'main.cpp'을(를) 컴파일하는 중)
+      C:\Users\wlals\source\repos\Ahegao\Ahegao\boss.h(7,9):
+      'DEG2RAD'의 이전 정의를 참조하십시오.
+  
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(82,19): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(229,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(229,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(253,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Ahegao\Ahegao\main.cpp(468,25): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
   Ahegao.vcxproj -> C:\Users\wlals\source\repos\Ahegao\x64\Debug\Ahegao.exe

@@ -57,8 +57,11 @@
     <ClCompile Include="Item.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Spikezone.cpp">
+    <ClCompile Include="tracking.cpp">
       <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>소스 파일\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>헤더 파일\map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,60 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="res\attack\MuckBoss.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시6.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\MuckBossGrogi.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Boss2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Easy.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Exit.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Hard.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Heart.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Normal.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Start.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Start_Menu.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

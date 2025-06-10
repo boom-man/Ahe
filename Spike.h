@@ -1,5 +1,7 @@
 #pragma once
 #include <windows.h>
+#include <gdiplus.h>
+using namespace Gdiplus;
 #include "player.h"
 #include "boss.h"
 #pragma comment(lib, "Msimg32.lib")
@@ -9,14 +11,16 @@ class Spike {
 public:
     float x, y, speed; // 좌표 및 속도
     float dx, dy; // 방향 벡터
-    float cx; // 꿈틀꿈틀 하는거 
+    float cx, radius,angle; // 꿈틀꿈틀 하는거 and 회전할때 radius
     int attack; // 현재 상태
-    int spawncount, bitmapcount = 0;// 몇 초 뒤 생성
+    int spawncount, bitmapcount = 0, during;// 몇 초 뒤 생성
+    bool attack4;
     Spike();
-
+    bool check(Player& player);
     void Init(HBITMAP Yong[], int w[], int h[],
         float startX, float startY, float dirX, float dirY, float speed, int what, int count);
-    void Update(const Boss& boss,const Player& player);
+    void radiusInit(float centerX, float centerY, int what, float sp, int count, float angleInput, float radiusInput,int during);
+    void Update(const Boss& boss,Player& player,int i);
     void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]);
 };
 
@@ -27,24 +31,24 @@ public:
     int spawncount, bitmapcount, Delay;
     int BangHyang, attackpoint;
     int rainbowAlpha = 0;
-    Yong();
+    RECT attackRect;
 
+    Yong();
+    bool CheckCollision(const RECT& rect, float px, float py);
     void Spawn(float startX,float startGap, int spawn, int during,int Dlay);
-    void Update();
+    void Update(Player& player, int w[], int h[]);
     void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]);
     void DrawRainbowLines(HDC hdc, int alpha, int attackpoint);
 };
 
-class SpikeZone {
+class Tracking {
 public:
     bool active;
-    float angle;            // 중심 각도 (라디안)
-    float centerX, centerY; // 궤도 중심
-    float radius;           // 궤도 반지름
-    int startTime;          // 생성 프레임 시간
+    float centerX, centerY, speed; // 궤도 중심
+    int spawncount, duration;        // 생성 프레임 시간
 
-    SpikeZone();
-    void Init(float angle, float centerX, float centerY, float radius, int currentFrame);
-    void Update(int currentFrame, Player& player);
-    void Draw(HDC hdc, HBITMAP spikeImg);
+    Tracking();
+    void Init(float startX, float startY, int spawnFrame, float speed, int duration);
+    void Update( Player& player);
+    void Draw(HDC hdc);
 };

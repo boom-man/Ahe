@@ -54,7 +54,7 @@ void Yong::Spawn(float startX, float startGap, int spawn, int vector, int Dlay) 
 		}
 	}
 }
-void Yong::Update() {
+void Yong::Update(Player& player, int w[], int h[]) {
 	if (attack) {
 		if (Delay > 0) {
 			Delay--;
@@ -69,21 +69,41 @@ void Yong::Update() {
 			// 아직 무지개 연출 중 → 움직이지 않음
 			return;
 		}
+		// 충돌 체크
+
+
+		if (attackpoint == 0 || attackpoint == 1) {
+			attackRect.left = x;
+			attackRect.top = y;
+			attackRect.right = attackRect.left + 40 * 19;
+			attackRect.bottom = attackRect.top + 40;
+		}
+		else {
+			attackRect.left = x;
+			attackRect.top = y;
+			attackRect.right = x + 40;
+			attackRect.bottom = y + 40 * 12;
+		}
+
+		if (CheckCollision(attackRect, player.x, player.y)) {
+			player.health--;
+			player.delay = 10;
+		}
 		// 방향에 따라 이동 처리
 		if (attackpoint == 0 || attackpoint == 1){
 			if (BangHyang == 0) {//up
-				y -= 30;
+				y -= 10;
 			}
 			else {//down
-				y += 30;
+				y += 10;
 			}
 		}
 		else {
 			if (BangHyang == 0) {//left
-				x -= 30;
+				x -= 10;
 			}
 			else {//right
-				x += 30;
+				x += 10;
 			}
 		}
 	}
@@ -184,4 +204,8 @@ void Yong::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], 
 				rainbowAlpha += 5;  // 클래스 멤버로 둬야 함
 		}
 	}
+}
+bool Yong::CheckCollision(const RECT& rect, float px, float py) {
+	return (px >= rect.left && px <= rect.right &&
+		py >= rect.top && py <= rect.bottom);
 }
