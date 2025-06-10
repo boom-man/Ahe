@@ -162,7 +162,7 @@ void Player::Update(Boss& boss) {
     if (!boss.isGroggy && boss.groggyAngle != 0) {
         if (angle < boss.groggyAngle + 0.16f && angle > boss.groggyAngle - 0.16) {
             health--;
-            delay = 10;
+            delay = 20;
         }
     }
 }

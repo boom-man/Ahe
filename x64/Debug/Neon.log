@@ -8,8 +8,8 @@ C:\Users\wlals\source\repos\Neon\Neon\main.cpp(89,19): warning C4244: 'return': 
 C:\Users\wlals\source\repos\Neon\Neon\main.cpp(140,45): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\wlals\source\repos\Neon\Neon\main.cpp(140,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\wlals\source\repos\Neon\Neon\main.cpp(175,22): warning C4553: '==': 식의 결과가 사용되지 않습니다. '='을(를) 의도했습니까?
-C:\Users\wlals\source\repos\Neon\Neon\main.cpp(335,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\wlals\source\repos\Neon\Neon\main.cpp(335,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\wlals\source\repos\Neon\Neon\main.cpp(360,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\wlals\source\repos\Neon\Neon\main.cpp(599,25): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(358,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(552,59): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(552,44): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(606,25): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
   Neon.vcxproj -> C:\Users\wlals\source\repos\Neon\x64\Debug\Neon.exe

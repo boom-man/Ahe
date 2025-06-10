@@ -28,14 +28,14 @@ public:
     int page, Level, groggytime;
 
 
-    bool debug;
+    bool debug, go;
 
     bool isGroggy,Groggy_ing, lineattack, isPeripheralTime;  // 그로기 상태
     int health, lineattackstart;
     Boss();
     void Init(float startX, float startY, int startHealth, int LV);
-    void Update(const Player& player, int timecount);
-    void Attack(const Player& player,int timecount);
+    void Update(const Player& player, int* timecount);
+    void Attack(const Player& player,int* timecount);
     void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]);
     void CenternMove(); // 가운데
     void LoopingMove(); // 무한대 궤적

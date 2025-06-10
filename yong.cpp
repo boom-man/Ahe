@@ -93,9 +93,9 @@ void Yong::Update(Player& player, int w[], int h[]) {
 			attackRect.bottom = y + 40 * 12;
 		}
 
-		if (CheckCollision(attackRect, player.x, player.y)) {
+		if (CheckCollision(attackRect, player.x, player.y) && player.delay <= 0) {
 			player.health--;
-			player.delay = 50;
+			player.delay = 20;
 		}
 		// 방향에 따라 이동 처리
 		if (attackpoint == 0 || attackpoint == 1){

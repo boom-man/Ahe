@@ -24,7 +24,7 @@ void Boss::Init(float startX, float startY, int startHealth, int LV) {
     Level = LV;
 }
 
-void Boss::Update(const Player& player, int timecount) {
+void Boss::Update(const Player& player, int* timecount) {
     // 보스 이동 및 공격 패턴을 위한 로직 추가
     if (health <= 0) {
         isGroggy = true;
@@ -179,13 +179,10 @@ void Boss::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], 
             TransparentBlt(hdc, x - 50, y - 50, w[1], h[1], hMemDC, 0, 0, w[1], h[1], RGB(255, 255, 255));
             SelectObject(hMemDC, OldBit[2]);
         }
-        else {
-
-        }
     }
 }
-void Boss::Attack(const Player& player,int timecount) {
-    int pattern = (timecount % 600);
+void Boss::Attack(const Player& player,int* timecount) {
+    int pattern = ((*timecount) % 600);
 
     if (!lineattack) {
         switch (currentSet) {
@@ -221,12 +218,13 @@ void Boss::Attack(const Player& player,int timecount) {
         }
     }
     else {
+
         // 선형 떨림 공격 모드
         if (lineattackstart == -1) {
-            lineattackstart = timecount;
+            lineattackstart = (*timecount);
         }
 
-        int elapsed = timecount - lineattackstart;
+        int elapsed = (*timecount) - lineattackstart;
 
         if (elapsed < 180) {
             float frequency = 1.0f + (elapsed / 30.0f);
@@ -238,12 +236,15 @@ void Boss::Attack(const Player& player,int timecount) {
             x = (int)(centerX + sin(elapsed * frequency * 0.1f) * amplitudeX);
             y = (int)(centerY + cos(elapsed * frequency * 0.1f) * amplitudeY);
         }
-        else if (elapsed >= 300) {
+        else if (elapsed >= 200) {
             // 선형 공격 끝
             lineattack = false;
+            go = false;
             lineattackstart = -1;
+            (*timecount) = 0;
         }
         else {
+            go = true;
             x = 1920 / 2;
             y = 1080 / 2;
         }

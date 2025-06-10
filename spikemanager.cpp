@@ -106,24 +106,18 @@ void SpikeManager::SpawnManager(HBITMAP Yong[], int w[], int h[], HDC hdc,
         }
     }
 
-    // 현재 subPattern 선택
-    int offset = timecount - fullCycleStart;
-    int subCycle = offset / 200;
+    int subCycle = timecount / 200;
     boss.currentSet = subPatterns[subCycle];  // Boss::Attack()에서도 사용 가능하게
-    /*if (boss.page >= 0) {
-        subPatterns[0] = PatternSet::LV1Combo1;
-        subPatterns[1] = PatternSet::LV1Combo1;
-        subPatterns[2] = PatternSet::LV1Combo1;
-    }*/
+    
     PatternSet currentSet = subPatterns[subCycle];
     if (!boss.isGroggy) {
-        int localOffset = offset % 200;
+        int localOffset = timecount % 200;
         if (!boss.lineattack) {
             switch (currentSet) {
             case PatternSet::LV1Combo1:
                 if (localOffset % 30 == 0)
                     SpawnCross(Yong, w, h, boss.x, boss.y);
-                else if (localOffset % 30 == 15 && Level == 1)
+                else if (localOffset % 30 == 15 )
                     SinglePointSpikes(Yong, w, h, boss.x, boss.y, player.x, player.y);
                 if (localOffset == 90 || localOffset == 150)
                     SpawnXShape(Yong, w, h, boss.x, boss.y);
@@ -207,7 +201,7 @@ void SpikeManager::SpawnManager(HBITMAP Yong[], int w[], int h[], HDC hdc,
                 break;
             }
         }
-        else {
+        if (boss.go) {
             OrbitTimeAttack(Yong, w, h,
                 boss.x, boss.y, timecount, boss.lineattackstart);
             boss.page++;
@@ -329,7 +323,7 @@ void SpikeManager::SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
         spikes[spikeCount++].Init(Yong,w,h,
             cx, cy, dx, dy, 30.0f + speed, 0,7);
     }
-    if (Level == 2) {
+    if (Level == 2 || Level == 3) {
         if (spikeCount + 12 >= MAX_SPIKES) spikeCount = 0;
         // 기준 방향 벡터
         float dirX = targetX - cx;
@@ -358,14 +352,6 @@ void SpikeManager::SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
                 cx, cy, dx, dy, 26.0f + speed, 0,10);
             spikes[spikeCount++].Init(Yong,w,h,
                 cx, cy, dx, dy, 26.5f + speed, 0,15);
-        }
-    }
-    else {
-        float dx = targetX - cx;
-        float dy = targetY - cy;
-        for (int i = 0; i < 5; i++) {
-            spikes[spikeCount++].Init(Yong, w, h,
-                cx, cy, dx, dy, 35.0f + speed, 0, i * 10);
         }
     }
 }
@@ -484,24 +470,21 @@ void SpikeManager::OrbitTimeAttack(HBITMAP Yong[], int w[], int h[],
         prevStart = lineattackstart;
     }
 
-    if (spikeCount + 200 >= MAX_SPIKES) spikeCount = 0;
+    if (spikeCount + 100 >= MAX_SPIKES) spikeCount = 0;
 
     const int totalSpikes = 100;
-    int elapsed = timecount - lineattackstart;
 
-    if (elapsed >= 100) {
-        int burst = 3 + rand() % 5;
-
-        for (int i = 0; i < burst && emittedCount < totalSpikes && spikeCount < MAX_SPIKES; ++i) {
-            float angle = DEG2RAD(rand() % 360);
-            float dirX = cos(angle);
-            float dirY = sin(angle);
-            float sp = 5.0f + static_cast<float>(rand() % 16);
-            spikes[spikeCount++].Init(Yong, w, h,
-                centerX, centerY, dirX, dirY, sp, 0, 0);
-            ++emittedCount;
-        }
+    int burst = 3 + rand() % 5;
+    for (int i = 0; i < burst && emittedCount < totalSpikes && spikeCount < MAX_SPIKES; ++i) {
+        float angle = DEG2RAD(rand() % 360);
+        float dirX = cos(angle);
+        float dirY = sin(angle);
+        float sp = 5.0f + static_cast<float>(rand() % 16);
+        spikes[spikeCount++].Init(Yong, w, h,
+            centerX, centerY, dirX, dirY, sp, 0, 0);
+        ++emittedCount;
     }
+    
 }
 void SpikeManager::OrbitingAttack(float centerX, float centerY,int during) {
     const float spacing = 50.0f;           // 각 원의 반지름 간격
@@ -556,15 +539,15 @@ void SpikeManager::TrackingOrbAttack(float centerX, float centerY) {
             trackcount++;
         }
         // tracking[trackcount]를 초기화해서 추적 공격 활성화
-        tracking[trackcount].Init(centerX, centerY, 0, 3.0f /*속도*/, 50 /*지속시간*/);
+        tracking[trackcount].Init(centerX, centerY, 0, 7.0f /*속도*/, 50 /*지속시간*/);
     }
     else if (Level == 2) {
         if (trackcount + 2 >= 5) {
             trackcount = 0;
         }
         // tracking[trackcount]를 초기화해서 추적 공격 활성화
-        tracking[trackcount++].Init(centerX, centerY, 0, 3.0f /*속도*/, 50 /*지속시간*/);
-        tracking[trackcount++].Init(centerX, centerY, 30, 3.0f /*속도*/, 50 /*지속시간*/);
+        tracking[trackcount++].Init(centerX, centerY, 0, 7.0f /*속도*/, 50 /*지속시간*/);
+        tracking[trackcount++].Init(centerX, centerY, 30, 7.0f /*속도*/, 50 /*지속시간*/);
     }
     else {
         if (trackcount + 1 >= 5) {
@@ -579,8 +562,20 @@ void SpikeManager::TrackingOrbAttack(float centerX, float centerY) {
 }
 void SpikeManager::Reset() {
     spikeCount = 0;
+    for (int i = 0; i < 1000; i++) {
+        if (spikes[i].attack >= 0) {
+            spikes[i].attack = -1;
+        }
+    }
     yongcount = 0;
+    for (int i = 0; i < 30; i++) {
+        yong[i].attack = false;
+        yong[i].rainbowAlpha = 0;
+    }
     trackcount = 0;
+    for (int i = 0; i < 5; i++) {
+        tracking[i].active = false;
+    }
     speed = 0;
     Level = 3;
     lineattackstart = -1;

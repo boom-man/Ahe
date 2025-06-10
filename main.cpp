@@ -38,17 +38,17 @@ int lv = spikeManager.GetLevel();//1212121212
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void GameInit();
 void GameUpdate(HWND hwnd);
-void GameRender(HDC hdc);
+void GameRender(HDC hdc,int timecount);
 static int j = 9;
-static int timecount = 0, spawncount = 0;
 static bool game_start = false;
+
 static int game_start_count = 3; static int digits[5];
 static int Count_Clock, Count_Item, GameDifficulty, HeartAmount, AttackChargeAmmount, AttackTimeCount, Score_Count;
 static HBITMAP PlayerBit, CircleMapBit, CircleItemBit, StaminaBit,
 StaminaItemBit, AttackItemBit, AttackChargeBit, AttackFrameBit,
 Circle2Bit, Circle2ItemBit, ItemBIt, Circle3ItemBit, Circle3Bit,
 MAPBIT, HeartBit, NumberBit[10]; 
-
+static int volume = 500;
 static BOOL ItemSpawned, GameStart, selected_done, Attack, GameEnd;
 
 
@@ -145,7 +145,7 @@ void GameInit() {
     map.Init(xx / 2, yy / 2, 400); // 맵 중심 반지름
     player.Init(xx / 2, yy / 2, player.health, 100);  // 플레이어 초기화
 }
-void ResetGame() {
+void ResetGame(int* spawncount, int* timecount) {
     // 플레이어 초기화
     player.Init(xx / 2, yy / 2, 10, 100);  // 체력을 기본값(예: 10)으로 설정
     player.mapMove = 0;
@@ -166,16 +166,18 @@ void ResetGame() {
     spikeManager.Reset();  // SpikeManager 클래스에 Reset() 메서드 구현 필요
 
     // 게임 상태 변수 리셋
-    timecount = 0;
-    spawncount = 0;
+    (*timecount) = 0;
+    (*spawncount) = 0;
     game_start = false;
     game_start_count = 3;
     Attack = false;
     AttackChargeAmmount = 0;
     boss.groggyAngle == 0.0f;
+
+    MAPBIT = CircleMapBit;
 }
 
-void GameUpdate(HWND hwnd, int timecount) {
+void GameUpdate(HWND hwnd, int* timecount) {
     boss.Update(player, timecount);    // 보스 업데이트
     map.Update();     //맵 업데이트        
     spikeManager.Update(boss,player);
@@ -326,14 +328,10 @@ void ScoreCal(int x)
     digits[3] = (x % 100) / 10;     // 십의 자리
     digits[4] = x % 10;               //일의 자리
 }
-void GameRender(HDC hdc) {
+void GameRender(HDC hdc,int spawncount) {
     TCHAR buffer[64];
-    _stprintf(buffer, TEXT("%d %d"),player.bossatackpoint, Score_Count);
+    _stprintf(buffer, TEXT("%d %d"),spawncount,boss.go);
     TextOut(hdc, 10, 10, buffer, lstrlen(buffer)); // 좌표 (10, 10)에 출력
-
-    if (!boss.isGroggy && boss.groggyAngle != 0.0f) {
-        boss.DrawGroggyDanger(hdc,boss.qcenterX, boss.qcenterY);
-    }
 }
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     PAINTSTRUCT ps;
@@ -347,9 +345,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     static int BossW[2], BossH[2], SpikeW[4], SpikeH[4], PH, PW, BossW2[2], BossH2[2],bossW13[2],bossH13[2];
     static int rktlW[6], rktlH[6], LV1_rktlW[3], LV1_rktlH[3],LV3_rktlW[1],LV3_rktlH[1];
     HBRUSH hBrush, oldBrush; // 브러쉬
+    static float p_speed;
 
     static int timecount = 0, spawncount = 0;
-    static float p_speed;
 
     static bool sound1 = false;
     static int sound1count = 0;
@@ -494,6 +492,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 ScoreCal(Score_Count);
                 GameStart = false;
                 GameEnd = true;
+                boss.groggyAngle = 0;
+                boss.isGroggy = false;
+                boss.lineattack = false;
+                spawncount = 0;
+                timecount = 0;
                 InvalidateRect(hwnd, NULL, FALSE);  // 화면 갱신
                 break;
             }
@@ -538,13 +541,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 }
             }
             Stamina_Draw(mdc, StaminaBit, hBitmap, 25, 900);
+            if (Attack) Attack_Draw(mdc, AttackChargeBit, hBitmap, 0, 0);
             Score_Count++;
         }
         else if (GameEnd) {
             menu.MenuEndDraw(mdc);
             ScoreDraw(mdc);
         }
-        GameRender(mdc);
+        if (!boss.isGroggy && boss.groggyAngle != 0.0f) {
+            boss.DrawGroggyDanger(mdc, boss.qcenterX, boss.qcenterY);
+        }
+        //GameRender(mdc, timecount);
         //===================================================================
         BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
         DeleteDC(mdc);
@@ -566,7 +573,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
             if (wp == 1) {
                 if (game_start) {
                     timecount++;
-                    GameUpdate(hwnd, timecount);  // 타이머에 의해 게임 업데이트
+                    GameUpdate(hwnd, &timecount);  // 타이머에 의해 게임 업데이트
                 }
                 player.Update(boss);  // 플레이어 업데이트
                 if (Attack) {
@@ -624,6 +631,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 }
             }
         }
+        if (boss.isGroggy) spawncount = 0;
         break;
     case WM_KEYDOWN:
         if (!player.bounced) {
@@ -675,7 +683,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 else if (x<menu.Start_EXIT.right && x>menu.Start_EXIT.left && y < menu.Start_EXIT.bottom && y > menu.Start_EXIT.top) menu.GameExit();
             }
             else if (GameEnd) {
-                if (x<menu.END_EXIT.right && x>menu.END_EXIT.left && y < menu.END_EXIT.bottom && y > menu.END_EXIT.top)  menu.GameExit();
+                if (x<menu.END_EXIT.right && x>menu.END_EXIT.left && y < menu.END_EXIT.bottom && y > menu.END_EXIT.top) { menu.GameExit();}
                 else if (x<menu.MENUBUTTON.right && x>menu.MENUBUTTON.left && y < menu.MENUBUTTON.bottom && y > menu.MENUBUTTON.top) {
                     KillTimer(hwnd, 1);
                     KillTimer(hwnd, 2);
@@ -683,13 +691,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     KillTimer(hwnd, 69);
 
                     // 게임 상태 완전 리셋
-                    ResetGame();
+                    ResetGame(&spawncount,&timecount);
 
                     // 타이머 재설정
                     SetTimer(hwnd, 1, 32, NULL);
                     SetTimer(hwnd, 2, 50, NULL);
                     SetTimer(hwnd, 3, 1, NULL);
-                    SetTimer(hwnd, 69, 1000, NULL);
 
                     // 메뉴 상태로 복귀
                     GameEnd = false;
@@ -697,17 +704,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     menu.Select_Difficulty = false;
                     selected_done = false;
 
-
                     InvalidateRect(hwnd, NULL, TRUE);  // 화면 갱신
                 }
             }
             else
             {
-                if (x<menu.EASY.right && x>menu.EASY.left && y < menu.EASY.bottom && y > menu.EASY.top) { GameDifficulty = easy; selected_done = true; GameStart = true; player.health = 10; spikeManager.SetLevel(1); SetTimer(hwnd, 69, 1000, NULL);
+                if (x<menu.EASY.right && x>menu.EASY.left && y < menu.EASY.bottom && y > menu.EASY.top) 
+                { 
+                    GameDifficulty = easy; selected_done = true; GameStart = true; player.health = 10; spikeManager.SetLevel(1); SetTimer(hwnd, 69, 1000, NULL);
                 }
-                else if (x<menu.NORMAL.right && x>menu.NORMAL.left && y < menu.NORMAL.bottom && y > menu.NORMAL.top) { GameDifficulty = normal; selected_done = true; GameStart = true; player.health = 5; spikeManager.SetLevel(3); SetTimer(hwnd, 69, 1000, NULL);
+                else if (x<menu.NORMAL.right && x>menu.NORMAL.left && y < menu.NORMAL.bottom && y > menu.NORMAL.top) 
+                { 
+                    GameDifficulty = normal; selected_done = true; GameStart = true; player.health = 5; spikeManager.SetLevel(3); SetTimer(hwnd, 69, 1000, NULL);
                 }
-                else if (x<menu.HARD.right && x>menu.HARD.left && y < menu.HARD.bottom && y > menu.HARD.top) { GameDifficulty = hard; selected_done = true; GameStart = true; player.health = 3; spikeManager.SetLevel(2); SetTimer(hwnd, 69, 1000, NULL); }
+                else if (x<menu.HARD.right && x>menu.HARD.left && y < menu.HARD.bottom && y > menu.HARD.top) 
+                { 
+                    GameDifficulty = hard; selected_done = true; GameStart = true; player.health = 3; spikeManager.SetLevel(2); SetTimer(hwnd, 69, 1000, NULL); 
+                }
 
                 boss.Init(xx / 2, yy / 2, 100, spikeManager.GetLevel());    // 보스 초기화
             }

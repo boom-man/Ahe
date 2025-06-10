@@ -51,7 +51,7 @@ void Spike::Update(const Boss& boss,Player& player,int i) {
         if (check(player) && !player.invincible){
             if (player.delay <= 0) {
                 player.health--;
-                player.delay = 50;
+                player.delay = 20;
             }
         }
         if (attack == 0 || attack == 1 || attack == 4) {
@@ -113,7 +113,7 @@ bool Spike::check(Player& player) {
     float dx = x - player.x;
     float dy = y - player.y;
     float distanceSquared = dx * dx + dy * dy;
-    float combinedRadius = 30.0f + 20.0f;
+    float combinedRadius = 15.0f + 10.0f;
     if (distanceSquared <= combinedRadius * combinedRadius) {
         return true;
     }

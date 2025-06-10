@@ -48,7 +48,7 @@ void Tracking::Update( Player& player) {
         // 충돌: 플레이어 체력 감소
         if (player.delay <= 0){
             player.health--;
-            player.delay = 50;
+            player.delay = 20;
         }
         return;
     }
