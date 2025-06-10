@@ -13,8 +13,8 @@ public:
     float dx, dy; // 방향 벡터
     float cx, radius,angle; // 꿈틀꿈틀 하는거 and 회전할때 radius
     int attack; // 현재 상태
-    int spawncount, bitmapcount = 0, during;// 몇 초 뒤 생성
-    bool attack4;
+    int spawncount, bitmapcount = 0, during, attack5count;// 몇 초 뒤 생성
+    bool attack4,sound;;
     Spike();
     bool check(Player& player);
     void Init(HBITMAP Yong[], int w[], int h[],
@@ -34,6 +34,7 @@ public:
     RECT attackRect;
 
     Yong();
+    void Reset();
     bool CheckCollision(const RECT& rect, float px, float py);
     void Spawn(float startX,float startGap, int spawn, int during,int Dlay);
     void Update(Player& player, int w[], int h[]);

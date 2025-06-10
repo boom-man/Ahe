@@ -1,0 +1,77 @@
+﻿  boss.cpp
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(59,17): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(60,17): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(118,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(118,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(127,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(127,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(170,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(170,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(179,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(179,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(238,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(239,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(302,14): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(303,13): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(304,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(305,16): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Item.cpp
+  main.cpp
+C:\Users\wlals\source\repos\Neon\Neon\SpikeManager.h(4,9): warning C4005: 'DEG2RAD': 매크로 재정의
+  (소스 파일 'main.cpp'을(를) 컴파일하는 중)
+      C:\Users\wlals\source\repos\Neon\Neon\boss.h(7,9):
+      'DEG2RAD'의 이전 정의를 참조하십시오.
+  
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(82,19): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(229,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(229,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(258,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(483,25): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  map.cpp
+  Mapstyle0.cpp
+  Menu.cpp
+  player.cpp
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(78,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(175,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(175,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  spike.cpp
+C:\Users\wlals\source\repos\Neon\Neon\spike.cpp(109,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spike.cpp(109,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  spikemanager.cpp
+C:\Users\wlals\source\repos\Neon\Neon\SpikeManager.h(4,9): warning C4005: 'DEG2RAD': 매크로 재정의
+  (소스 파일 'spikemanager.cpp'을(를) 컴파일하는 중)
+      C:\Users\wlals\source\repos\Neon\Neon\boss.h(7,9):
+      'DEG2RAD'의 이전 정의를 참조하십시오.
+  
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(131,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(164,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(381,58): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(381,51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(394,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(394,55): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(407,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(407,55): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  tracking.cpp
+  yong.cpp
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(76,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(77,21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(82,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(83,21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(84,25): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(85,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(191,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(191,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(196,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(196,25): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+main.obj : error LNK2001: 확인할 수 없는 외부 기호 GdiplusShutdown
+main.obj : error LNK2001: 확인할 수 없는 외부 기호 GdiplusStartup
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipDeleteGraphics
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipCloneBrush
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipFillEllipseI
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipCreateFromHDC
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipFree
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipCreateSolidFill
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipSetSmoothingMode
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipAlloc
+tracking.obj : error LNK2001: 확인할 수 없는 외부 기호 GdipDeleteBrush
+C:\Users\wlals\source\repos\Neon\x64\Release\Neon.exe : fatal error LNK1120: 11개의 확인할 수 없는 외부 참조입니다.

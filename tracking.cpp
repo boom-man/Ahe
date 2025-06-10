@@ -35,7 +35,7 @@ void Tracking::Update( Player& player) {
         active = false;
         return;
     }
-
+    duration--;
     // 플레이어 위치로 향하는 방향 벡터 계산
     float dx = player.x - centerX;
     float dy = player.y - centerY;
@@ -48,7 +48,7 @@ void Tracking::Update( Player& player) {
         // 충돌: 플레이어 체력 감소
         if (player.delay <= 0){
             player.health--;
-            player.delay = 10;
+            player.delay = 50;
         }
         return;
     }

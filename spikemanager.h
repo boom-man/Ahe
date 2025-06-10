@@ -24,7 +24,7 @@ public:
     void SpawnManager(HBITMAP Yong[], int w[], int h[], HDC hdc,
         Boss& boss, const Player& player, int timecount);
     void Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]);
-
+    void Reset();  // 모든 스파이크 및 내부 상태 초기화
     // 스파이크 패턴들
     void SpawnCross(HBITMAP Yong[], int w[], int h[],
         float centerX, float centerY); // 완

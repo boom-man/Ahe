@@ -25,8 +25,11 @@ void SpikeManager::Update(const Boss& boss, Player& player) {
             if (Level == 1) {
                 spikes[i].Update(boss, player,3);
             }
-            else if (Level == 2) {
+            else if (Level == 2 || Level == 3) {
                 spikes[i].Update(boss, player, 6);
+            }
+            else {
+                spikes[i].Update(boss, player, 1);
             }
         }
     }
@@ -34,7 +37,7 @@ void SpikeManager::Update(const Boss& boss, Player& player) {
         if (Level == 1) {
             ghlwjsspikes[i].Update(boss, player, 3);
         }
-        if (Level == 2) {
+        if (Level == 2 || Level == 3) {
             ghlwjsspikes[i].Update(boss, player, 6);
         }
     }
@@ -107,11 +110,11 @@ void SpikeManager::SpawnManager(HBITMAP Yong[], int w[], int h[], HDC hdc,
     int offset = timecount - fullCycleStart;
     int subCycle = offset / 200;
     boss.currentSet = subPatterns[subCycle];  // Boss::Attack()에서도 사용 가능하게
-    if (boss.page >= 0) {
+    /*if (boss.page >= 0) {
         subPatterns[0] = PatternSet::LV1Combo1;
         subPatterns[1] = PatternSet::LV1Combo1;
         subPatterns[2] = PatternSet::LV1Combo1;
-    }
+    }*/
     PatternSet currentSet = subPatterns[subCycle];
     if (!boss.isGroggy) {
         int localOffset = offset % 200;
@@ -218,7 +221,7 @@ void SpikeManager::SpawnManager(HBITMAP Yong[], int w[], int h[], HDC hdc,
 void SpikeManager::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]) {
     for (int i = 0; i < 1000; ++i) {
         if (spikes[i].attack >= 0) {
-            spikes[i].Draw(hdc,hMemDC,Yong,OldBit,w,h);
+            spikes[i].Draw(hdc, hMemDC, Yong, OldBit, w, h);
         }
     }
     for (int i = 0; i < 40; i++) {
@@ -256,6 +259,22 @@ void SpikeManager::SpawnCross(HBITMAP Yong[], int w[], int h[],
             cx, cy, -1, 0, 15.0f + speed, 1, 0);
     }
     else {
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 0, 1, 15.0f + speed, 1,  1);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 1, 1, 15.0f + speed, 1,  2);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 1, 0, 15.0f + speed, 1,  3);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 1, -1, 15.0f + speed, 1,  4);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 0, -1, 15.0f + speed, 1,  5);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, -1, -1, 15.0f + speed, 1,  6);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, -1, 0, 15.0f + speed, 1,  7);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, -1, 1, 15.0f + speed, 1,  8);
     }
 }
 
@@ -282,6 +301,17 @@ void SpikeManager::SpawnXShape(HBITMAP Yong[], int w[], int h[],
             cx, cy, 1, -1, 15.0f + speed, 1, 0);
         spikes[spikeCount++].Init(Yong, w, h,
             cx, cy, -1, -1, 15.0f + speed, 1, 0);
+    }
+    else {
+        if (spikeCount + 4 >= MAX_SPIKES) spikeCount = 0;
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 1, 1, 30.0f + speed, 0, 0);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, -1, 1, 30.0f + speed, 0, 0);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, 1, -1, 30.0f + speed, 0, 0);
+        spikes[spikeCount++].Init(Yong, w, h,
+            cx, cy, -1, -1, 30.0f + speed, 0, 0);
     }
 }
 void SpikeManager::SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
@@ -313,9 +343,9 @@ void SpikeManager::SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
         float baseAngle = atan2(dirY, dirX);
         // -15도, 0도, +15도 세 방향
         float angles[3] = {
-            baseAngle - DEG2RAD(15.0f),
+            baseAngle - DEG2RAD(30.0f),
             baseAngle,
-            baseAngle + DEG2RAD(15.0f)
+            baseAngle + DEG2RAD(30.0f)
         };
         for (int i = 0; i < 3; ++i) {
             float dx = cos(angles[i]);
@@ -328,6 +358,14 @@ void SpikeManager::SinglePointSpikes(HBITMAP Yong[], int w[], int h[],
                 cx, cy, dx, dy, 26.0f + speed, 0,10);
             spikes[spikeCount++].Init(Yong,w,h,
                 cx, cy, dx, dy, 26.5f + speed, 0,15);
+        }
+    }
+    else {
+        float dx = targetX - cx;
+        float dy = targetY - cy;
+        for (int i = 0; i < 5; i++) {
+            spikes[spikeCount++].Init(Yong, w, h,
+                cx, cy, dx, dy, 35.0f + speed, 0, i * 10);
         }
     }
 }
@@ -358,7 +396,17 @@ void SpikeManager::WideAreaSpikes(HBITMAP Yong[], int w[], int h[],
         style = (style + 1) % 4;
     }
     else if (Level == 3) {
-
+        if (yongcount + 8 >= 30) {
+            yongcount = 0;
+            for (int i = 0; i < 30; i++) {
+                yong[i].rainbowAlpha = 0;
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            yong[yongcount].attackpoint = Wide_Attack_Leve2[3 - style][i];
+            yong[yongcount++].Spawn(startX, startgap, spawn, during, i * 70);
+        }
+        style = (style + 1) % 4;
     }
 }
 void SpikeManager::PeripheralSpikes(HBITMAP Yong[], int w[], int h[],
@@ -398,7 +446,7 @@ void SpikeManager::PeripheralSpikes(HBITMAP Yong[], int w[], int h[],
                 1400, 800, (1920 / 2) - 1400, (1080 / 2) - 800, 15.0f + speed, 1, 15);
         }
     }
-    else if (Level == 2) {
+    else if (Level == 2 || Level == 3) {
         for (int i = 0; i < 4; ++i) {
             float sx = positions[i].x;
             float sy = positions[i].y;
@@ -441,7 +489,7 @@ void SpikeManager::OrbitTimeAttack(HBITMAP Yong[], int w[], int h[],
     const int totalSpikes = 100;
     int elapsed = timecount - lineattackstart;
 
-    if (elapsed >= 180) {
+    if (elapsed >= 100) {
         int burst = 3 + rand() % 5;
 
         for (int i = 0; i < burst && emittedCount < totalSpikes && spikeCount < MAX_SPIKES; ++i) {
@@ -449,14 +497,8 @@ void SpikeManager::OrbitTimeAttack(HBITMAP Yong[], int w[], int h[],
             float dirX = cos(angle);
             float dirY = sin(angle);
             float sp = 5.0f + static_cast<float>(rand() % 16);
-            if (Level == 1) {
-                spikes[spikeCount++].Init(Yong, w, h,
-                    centerX, centerY, dirX, dirY, sp, 0, 0);
-            }
-            else if (Level == 2) {
-                spikes[spikeCount++].Init(Yong, w, h,
-                    centerX, centerY, dirX, dirY, sp, 4, 0);
-            }
+            spikes[spikeCount++].Init(Yong, w, h,
+                centerX, centerY, dirX, dirY, sp, 0, 0);
             ++emittedCount;
         }
     }
@@ -468,7 +510,7 @@ void SpikeManager::OrbitingAttack(float centerX, float centerY,int during) {
     int Count = 0;
     for (int i = 1; i <= 10; ++i) {
         float r = i * spacing;
-        if (Level == 2) {
+        if (Level == 2 || Level == 3) {
             for (int j = 0; j < 4; ++j) {
                 float angle = j * (PI / 2); // 0, π/2, π, 3π/2
                 if (Count >= 40) return;
@@ -514,7 +556,7 @@ void SpikeManager::TrackingOrbAttack(float centerX, float centerY) {
             trackcount++;
         }
         // tracking[trackcount]를 초기화해서 추적 공격 활성화
-        tracking[trackcount].Init(centerX, centerY, 0, 3.0f /*속도*/, 300 /*지속시간*/);
+        tracking[trackcount].Init(centerX, centerY, 0, 3.0f /*속도*/, 50 /*지속시간*/);
     }
     else if (Level == 2) {
         if (trackcount + 2 >= 5) {
@@ -523,5 +565,27 @@ void SpikeManager::TrackingOrbAttack(float centerX, float centerY) {
         // tracking[trackcount]를 초기화해서 추적 공격 활성화
         tracking[trackcount++].Init(centerX, centerY, 0, 3.0f /*속도*/, 50 /*지속시간*/);
         tracking[trackcount++].Init(centerX, centerY, 30, 3.0f /*속도*/, 50 /*지속시간*/);
+    }
+    else {
+        if (trackcount + 1 >= 5) {
+            trackcount = 0;
+        }
+        else {
+            trackcount++;
+        }
+        // tracking[trackcount]를 초기화해서 추적 공격 활성화
+        tracking[trackcount].Init(centerX, centerY, 0, 10.0f /*속도*/, 30 /*지속시간*/);
+    }
+}
+void SpikeManager::Reset() {
+    spikeCount = 0;
+    yongcount = 0;
+    trackcount = 0;
+    speed = 0;
+    Level = 3;
+    lineattackstart = -1;
+    attackstyle = 0;
+    for (int i = 0; i < 30; i++) {
+        yong[i].Reset();  // Spike 클래스에 Reset() 메서드 구현 필요
     }
 }

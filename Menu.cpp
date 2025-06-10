@@ -15,7 +15,7 @@ void Menu::MenuDraw(HDC hdc)
 {
 	HDC hdcmem = CreateCompatibleDC(hdc);
 	SelectObject(hdcmem, START_MENUBIT);
-	TransparentBlt(hdc, 0, 0, 1920, 1080, hdcmem, 0, 0, 1920, 1080, RGB(10, 10, 10));
+	TransparentBlt(hdc, 0, 0, 1920, 1080, hdcmem, 0, 0, 1920, 1080, RGB(0, 0, 0));
 	if (!Select_Difficulty)
 	{
 		SelectObject(hdcmem, START_STARTBIT);
@@ -35,6 +35,20 @@ void Menu::MenuDraw(HDC hdc)
 		SelectObject(hdcmem, HARDBIT);
 		TransparentBlt(hdc, 1300, 700, 400, 200, hdcmem, 0, 0, 400, 200, RGB(0, 0, 0));
 	}
+
+	DeleteDC(hdcmem);
+}
+void Menu::MenuEndDraw(HDC hdc)
+{
+	HDC hdcmem = CreateCompatibleDC(hdc);
+	SelectObject(hdcmem, EndBit);
+	TransparentBlt(hdc, 0, 0, 1920, 1080, hdcmem, 0, 0, 1920, 1080, RGB(10, 10, 10));
+
+	SelectObject(hdcmem, START_EXITBIT);
+	TransparentBlt(hdc, 780, 820, 400, 200, hdcmem, 0, 0, 400, 200, RGB(0, 0, 0));
+
+	SelectObject(hdcmem, MenuButtonBit);
+	TransparentBlt(hdc, 1180, 820, 400, 200, hdcmem, 0, 0, 400, 200, RGB(0, 0, 0));
 
 	DeleteDC(hdcmem);
 }

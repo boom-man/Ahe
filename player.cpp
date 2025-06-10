@@ -4,7 +4,7 @@
 #include <cmath>
 #pragma comment (lib, "msimg32.lib")
 
-Player::Player() : x(0), y(0), speed(1.0f), health(100), invincible(false), Dash(false), StaminaP(100) {}
+Player::Player() : x(0), y(0), speed(1.0f), health(10000), invincible(false), Dash(false), StaminaP(100) {}
 void Player::Init(float startX, float startY, int startHealth, int Stamina) {
     x = startX;
     y = startY;
@@ -144,6 +144,11 @@ void Player::Update(Boss& boss) {
     // 🧠 그로기 상태일 때 각도 체크 → 튕기고 데미지
     if (boss.isGroggy && !bounced) {
         if (angle < boss.groggyAngle + 0.16f && angle > boss.groggyAngle - 0.16) {
+            bossatackpoint += 50;
+            mciSendString(TEXT("open \"res//제목 없는 디자인.wav\" type waveaudio alias attackboss"), NULL, 0, NULL);
+            mciSendString(TEXT("play attackboss from 0"), NULL, 0, NULL);
+            attacksound = true;
+            soundcount = 10;
             if (Dash) {
                 Dash = false;
                 speed /= 5.0f;
@@ -156,7 +161,8 @@ void Player::Update(Boss& boss) {
     }
     if (!boss.isGroggy && boss.groggyAngle != 0) {
         if (angle < boss.groggyAngle + 0.16f && angle > boss.groggyAngle - 0.16) {
-            OutputDebugString(L"!!! 플레이어 위험구역 진입 !!!\n");
+            health--;
+            delay = 10;
         }
     }
 }

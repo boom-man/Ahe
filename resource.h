@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++에서 생성한 포함 파일입니다.
-// Ahegao.rc에서 사용되고 있습니다.
+// Neon.rc에서 사용되고 있습니다.
 //
 #define Bossbit                         101
 #define Spikebit                        102
@@ -28,7 +28,6 @@
 #define LV1_SPIKE3                      133
 #define IDB_BITMAP13                    134
 #define IDB_BITMAP14                    135
-
 #define IDB_BITMAP15                    136
 #define IDB_BITMAP16                    137
 #define IDB_BITMAP17                    138
@@ -36,12 +35,29 @@
 #define IDB_BITMAP19                    140
 #define IDB_BITMAP20                    141
 #define IDB_BITMAP21                    142
+#define IDB_BITMAP23                    144
+#define IDB_BITMAP24                    145
+#define AttackFrame                     146
+#define End_                            147
+#define Number0                         148
+#define Number1                         149
+#define Number2                         150
+#define Number3                         151
+#define Number4                         152
+#define Number5                         153
+#define Number6                         154
+#define Number7                         155
+#define Number8                         156
+#define Number9                         157
+#define AttackCharge                    158
+#define AttackItem                      159
+#define Menu_Button	                    160
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        143
+#define _APS_NEXT_RESOURCE_VALUE        161
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           104

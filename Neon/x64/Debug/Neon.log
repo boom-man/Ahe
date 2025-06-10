@@ -1,0 +1,65 @@
+﻿  boss.cpp
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(59,17): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(60,17): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(118,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(118,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(127,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(127,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(173,49): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(173,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(182,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(182,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(234,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(235,22): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(298,14): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(299,13): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(300,15): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\boss.cpp(301,16): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Item.cpp
+  main.cpp
+C:\Users\wlals\source\repos\Neon\Neon\SpikeManager.h(4,9): warning C4005: 'DEG2RAD': 매크로 재정의
+  (소스 파일 'main.cpp'을(를) 컴파일하는 중)
+      C:\Users\wlals\source\repos\Neon\Neon\boss.h(7,9):
+      'DEG2RAD'의 이전 정의를 참조하십시오.
+  
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(82,19): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(229,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(229,39): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(253,19): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\main.cpp(468,25): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  map.cpp
+  Mapstyle0.cpp
+  Menu.cpp
+  player.cpp
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(78,32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(170,35): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\player.cpp(170,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  spike.cpp
+C:\Users\wlals\source\repos\Neon\Neon\spike.cpp(105,39): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spike.cpp(105,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  spikemanager.cpp
+C:\Users\wlals\source\repos\Neon\Neon\SpikeManager.h(4,9): warning C4005: 'DEG2RAD': 매크로 재정의
+  (소스 파일 'spikemanager.cpp'을(를) 컴파일하는 중)
+      C:\Users\wlals\source\repos\Neon\Neon\boss.h(7,9):
+      'DEG2RAD'의 이전 정의를 참조하십시오.
+  
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(128,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(161,67): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(343,58): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(343,51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(356,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\spikemanager.cpp(356,55): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  tracking.cpp
+  yong.cpp
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(76,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(77,21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(82,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(83,21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(84,25): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(85,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(191,37): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(191,27): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(196,30): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\wlals\source\repos\Neon\Neon\yong.cpp(196,25): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  Neon.vcxproj -> C:\Users\wlals\source\repos\Neon\Neon\x64\Debug\Neon.exe

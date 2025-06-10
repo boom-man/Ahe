@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일\map">
+      <UniqueIdentifier>{06b837b7-0060-47fa-a22b-26cac9be769f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\map">
+      <UniqueIdentifier>{edaa69a2-d01d-4fc7-975a-7a694d472393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\boss">
+      <UniqueIdentifier>{0ce0acfb-0c2d-4b28-9d1f-f906cbe84df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\boss">
+      <UniqueIdentifier>{9ddc9468-dfb4-41a5-91ff-27353910feaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\Yong">
+      <UniqueIdentifier>{4af5d2a3-5403-4a27-9b36-0aeb8ec31aaf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Mapstyle0.cpp">
+      <Filter>소스 파일\map</Filter>
+    </ClCompile>
+    <ClCompile Include="boss.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>소스 파일\map</Filter>
+    </ClCompile>
+    <ClCompile Include="spike.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="spikemanager.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="yong.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="tracking.cpp">
+      <Filter>소스 파일\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>소스 파일\map</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapstyle.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="mapstyle0.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="boss.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Spike.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+    <ClInclude Include="spikemanager.h">
+      <Filter>헤더 파일\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>헤더 파일\map</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Neon.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\map\Circle2Item.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Circle3Item.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\CircleItem.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\NeonCircle.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\NeonCircle2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\NeonCircle3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\StaminaBmp.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\StaminaItemBit.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\네온원.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Boss.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Spike4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\MuckBoss.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Level1_가시3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\가시6.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\MuckBossGrogi.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\Boss2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Easy.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Exit.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Hard.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Heart.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Normal.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Start.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\Start_Menu.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\산기대.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\attack\한국공학대.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\AttackFrame.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\End_.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number0.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number6.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number7.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number8.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Number9.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Attack_Charge.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\AttackItem.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\map\score\Menu.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

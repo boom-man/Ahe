@@ -4,6 +4,14 @@
 Yong::Yong() : x(0), y(0),gap(0), attack(false), spawncount(0), attackpoint(0) {}
 
 int A[4] = {0,1,2,3};
+void Yong::Reset() {
+	x = 0;
+	y = 0;
+	gap = 0;
+	attack = false;
+	spawncount = 0;
+	attackpoint = 0;
+}
 				// 시작 위치, 간격, 몇초 동안 알려줄건지, 방향 = 가로 세로선2개씩, 레벨, 딜레이
 void Yong::Spawn(float startX, float startGap, int spawn, int vector, int Dlay) {
 	attack = true;
@@ -87,7 +95,7 @@ void Yong::Update(Player& player, int w[], int h[]) {
 
 		if (CheckCollision(attackRect, player.x, player.y)) {
 			player.health--;
-			player.delay = 10;
+			player.delay = 50;
 		}
 		// 방향에 따라 이동 처리
 		if (attackpoint == 0 || attackpoint == 1){

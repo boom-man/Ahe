@@ -5,7 +5,8 @@ enum ItemType {
     STAMINA,
     MAP_CHANGE1,
     MAP_CHANGE2,
-    MAP_CHANGE3
+    MAP_CHANGE3,
+    ATTACK
 };
 
 class Item {

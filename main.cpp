@@ -40,9 +40,16 @@ void GameInit();
 void GameUpdate(HWND hwnd);
 void GameRender(HDC hdc);
 static int j = 9;
-static int Count_Clock, Count_Item, GameDifficulty, HeartAmount;
-static HBITMAP PlayerBit, CircleMapBit, CircleItemBit, StaminaBit, StaminaItemBit, Circle2Bit, Circle2ItemBit, ItemBIt, Circle3ItemBit, Circle3Bit, MAPBIT, HeartBit;
-static BOOL ItemSpawned, GameStart, selected_done;
+static int timecount = 0, spawncount = 0;
+static bool game_start = false;
+static int game_start_count = 3; static int digits[5];
+static int Count_Clock, Count_Item, GameDifficulty, HeartAmount, AttackChargeAmmount, AttackTimeCount, Score_Count;
+static HBITMAP PlayerBit, CircleMapBit, CircleItemBit, StaminaBit,
+StaminaItemBit, AttackItemBit, AttackChargeBit, AttackFrameBit,
+Circle2Bit, Circle2ItemBit, ItemBIt, Circle3ItemBit, Circle3Bit,
+MAPBIT, HeartBit, NumberBit[10]; 
+
+static BOOL ItemSpawned, GameStart, selected_done, Attack, GameEnd;
 
 
 ULONGLONG lastUpdateTime = 0;
@@ -102,16 +109,70 @@ void Heart_Draw(HDC hdc, HBITMAP hbit, HBITMAP OldBit, int x, int y)
     SelectObject(hdcmem, hbit);
 
 
-    for (int i = 0; i < HeartAmount; i++)
+    for (int i = 0; i < player.health; i++)
     {
         TransparentBlt(hdc, x, y - (i * 50), 50, 50, hdcmem, 0, 0, 99, 99, RGB(0, 0, 0));
     }
 
     DeleteDC(hdcmem);
 }
+void Attack_Charge_Draw(HDC hdc, HBITMAP hbit, HBITMAP OldBit, int x, int y)
+{
+    HDC hdcmem = CreateCompatibleDC(hdc);
+    SelectObject(hdcmem, AttackFrameBit);
+    TransparentBlt(hdc, 0, 0, 250, 100, hdcmem, 0, 0, 1000, 400, RGB(0, 0, 0));
+
+    SelectObject(hdcmem, hbit);
+    for (int i = 0; i < AttackChargeAmmount; i++)
+    {
+        TransparentBlt(hdc, x + (i * 50), y, 50, 50, hdcmem, 0, 0, 99, 99, RGB(0, 0, 0));
+    }
+
+    DeleteDC(hdcmem);
+}
+
+void Attack_Draw(HDC hdc, HBITMAP hbit, HBITMAP OldBit, int x, int y)
+{
+    HDC hdcmem = CreateCompatibleDC(hdc);
+
+    SelectObject(hdcmem, hbit);
+
+    TransparentBlt(hdc, boss.x - 75, boss.y - 75, 150, 150, hdcmem, 0, 0, 99, 99, RGB(0, 0, 0));
+
+    DeleteDC(hdcmem);
+}
 void GameInit() {
     map.Init(xx / 2, yy / 2, 400); // 맵 중심 반지름
-    player.Init(xx / 2, yy / 2, 100, 100);  // 플레이어 초기화
+    player.Init(xx / 2, yy / 2, player.health, 100);  // 플레이어 초기화
+}
+void ResetGame() {
+    // 플레이어 초기화
+    player.Init(xx / 2, yy / 2, 10, 100);  // 체력을 기본값(예: 10)으로 설정
+    player.mapMove = 0;
+    player.speed = 1.0f;
+    player.StaminaP = 100;
+    player.Dash = FALSE;
+
+    // 보스 초기화
+    boss.Init(xx / 2, yy / 2, 100, spikeManager.GetLevel());
+
+    // 아이템 초기화
+    item.Reset();
+    ItemSpawned = false;
+    Count_Clock = 0;
+    Count_Item = 0;
+
+    // 스파이크 매니저 초기화
+    spikeManager.Reset();  // SpikeManager 클래스에 Reset() 메서드 구현 필요
+
+    // 게임 상태 변수 리셋
+    timecount = 0;
+    spawncount = 0;
+    game_start = false;
+    game_start_count = 3;
+    Attack = false;
+    AttackChargeAmmount = 0;
+    boss.groggyAngle == 0.0f;
 }
 
 void GameUpdate(HWND hwnd, int timecount) {
@@ -144,6 +205,12 @@ void GameUpdate(HWND hwnd, int timecount) {
             player.StaminaP = min(player.StaminaP + 40, 100);
             j = player.StaminaP / 10;
             OutputDebugString(L"[충돌] 스태미나 아이템 획득!\n");
+        }
+        else if (type == ATTACK) {
+            if (AttackChargeAmmount == 3)
+                AttackChargeAmmount = 3;
+            else
+                AttackChargeAmmount++;
         }
 
         // 공통 후처리: 아이템 제거 및 상태 초기화
@@ -211,8 +278,15 @@ void ItemSpawn()
     }
     else if (Count_Clock == 100) {
         Count_Item++;
-        item.Init(STAMINA, ix, iy);
-        ItemBIt = StaminaItemBit;
+        if (Count_Item % 2 == 0) {
+            item.Init(STAMINA, ix, iy);
+            ItemBIt = StaminaItemBit;
+        }
+        else
+        {
+            item.Init(ATTACK, ix, iy);
+            ItemBIt = AttackItemBit;
+        }
         ItemSpawned = true;
         Count_Clock = 0;
     }
@@ -220,16 +294,47 @@ void ItemSpawn()
         Count_Clock++;
     }
 }
-void GameRender(HDC hdc,int w[],int h[]) {
+
+void ScoreDraw(HDC hdc)
+{
+
+    HDC hdcmem = CreateCompatibleDC(hdc);
+
+    SelectObject(hdcmem, NumberBit[digits[0]]);
+    TransparentBlt(hdc, 950, 375, 150, 300, hdcmem, 0, 0, 150, 300, RGB(0, 0, 0));
+
+    SelectObject(hdcmem, NumberBit[digits[1]]);
+    TransparentBlt(hdc, 1100, 375, 150, 300, hdcmem, 0, 0, 150, 300, RGB(0, 0, 0));
+
+    SelectObject(hdcmem, NumberBit[digits[2]]);
+    TransparentBlt(hdc, 1250, 375, 150, 300, hdcmem, 0, 0, 150, 300, RGB(0, 0, 0));
+
+    SelectObject(hdcmem, NumberBit[digits[3]]);
+    TransparentBlt(hdc, 1400, 375, 150, 300, hdcmem, 0, 0, 150, 300, RGB(0, 0, 0));
+
+    SelectObject(hdcmem, NumberBit[digits[4]]);
+    TransparentBlt(hdc, 1550, 375, 150, 300, hdcmem, 0, 0, 150, 300, RGB(0, 0, 0));
+
+    DeleteDC(hdcmem);
+}
+
+void ScoreCal(int x)
+{
+    digits[0] = x / 10000;          // 만의 자리
+    digits[1] = (x % 10000) / 1000; // 천의 자리
+    digits[2] = (x % 1000) / 100;   // 백의 자리
+    digits[3] = (x % 100) / 10;     // 십의 자리
+    digits[4] = x % 10;               //일의 자리
+}
+void GameRender(HDC hdc) {
     TCHAR buffer[64];
-    _stprintf(buffer, TEXT("%.2f %.2f %d %d"),boss.x, boss.y, spikeManager.GetLevel(), boss.Level);
+    _stprintf(buffer, TEXT("%d %d"),player.bossatackpoint, Score_Count);
     TextOut(hdc, 10, 10, buffer, lstrlen(buffer)); // 좌표 (10, 10)에 출력
 
     if (!boss.isGroggy && boss.groggyAngle != 0.0f) {
         boss.DrawGroggyDanger(hdc,boss.qcenterX, boss.qcenterY);
     }
 }
-
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     PAINTSTRUCT ps;
     HDC hdc,mdc, hMemDC; // 더블버퍼 및 비트맵용
@@ -238,23 +343,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
     BITMAP bmp; // 비트맵용
     static RECT rectView; // 비트맵 용
 
-    static HBITMAP spikebitmap[4], bossbitmap[2], rktl[6], boss2bitmap[2], LV1_rktl[3];
-    static int BossW[2], BossH[2], SpikeW[4], SpikeH[4], PH, PW, BossW2[2], BossH2[2];
-    static int rktlW[6], rktlH[6], LV1_rktlW[3], LV1_rktlH[3];
+    static HBITMAP spikebitmap[4], bossbitmap[2], rktl[6], boss2bitmap[2], LV1_rktl[3], boss13[2],LV3_rktl[1];
+    static int BossW[2], BossH[2], SpikeW[4], SpikeH[4], PH, PW, BossW2[2], BossH2[2],bossW13[2],bossH13[2];
+    static int rktlW[6], rktlH[6], LV1_rktlW[3], LV1_rktlH[3],LV3_rktlW[1],LV3_rktlH[1];
     HBRUSH hBrush, oldBrush; // 브러쉬
 
     static int timecount = 0, spawncount = 0;
     static float p_speed;
 
-    static bool game_start = false;
-    static int game_start_count = 3;
+    static bool sound1 = false;
+    static int sound1count = 0;
     switch (msg) {
     case WM_CREATE:
+        mciSendString(TEXT("open \"res//AVOID N SURVIVE 음악.wav\" type mpegvideo alias bgm"), NULL, 0, NULL);
+        mciSendString(TEXT("play bgm repeat"), NULL, 0, NULL);
         srand(time(NULL));
-        SetTimer(hwnd, 69, 1000, NULL); // 게임 스타트 타이머
+        SetTimer(hwnd, 77, 100, NULL); // 소리 제어
         //============================================================================
         hdc = GetDC(hwnd);
         GetClientRect(hwnd, &rectView);
+        boss13[0] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP24));
+        boss13[1] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP23));
+
+
         spikebitmap[0] = LoadBitmap(g_hInst, MAKEINTRESOURCE(102));
         spikebitmap[1] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP10));
         spikebitmap[2] = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP11));
@@ -280,6 +391,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         menu.EASYBIT = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP15));
         menu.NORMALBIT = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP19));
         menu.HARDBIT = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP17));
+        menu.MenuButtonBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(Menu_Button));
+        menu.EndBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(End_));
 
         PlayerBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP1));
 
@@ -294,6 +407,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
 
         StaminaBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP3));
         StaminaItemBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP4));
+        
+        for (int i = 0; i < 10; i++) NumberBit[i] = LoadBitmap(g_hInst, MAKEINTRESOURCE(Number0 + i));
+        AttackItemBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(AttackItem));
+        AttackChargeBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(AttackCharge));
+        AttackFrameBit = LoadBitmap(g_hInst, MAKEINTRESOURCE(AttackFrame));
+
+        GetObject(boss13[0], sizeof(BITMAP), &bmp);
+        bossW13[0] = bmp.bmWidth; bossH13[0] = bmp.bmHeight;
+
+        GetObject(boss13[1], sizeof(BITMAP), &bmp);
+        bossW13[1] = bmp.bmWidth; bossH13[1] = bmp.bmHeight;
 
         GetObject(bossbitmap[0], sizeof(BITMAP), &bmp);
         BossW[0] = bmp.bmWidth; BossH[0] = bmp.bmHeight;
@@ -325,7 +449,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         ItemBIt = StaminaItemBit;
         MAPBIT = CircleMapBit;
         //=============================================================================
-        SetTimer(hwnd, 1, 60, NULL);
+        SetTimer(hwnd, 1, 50, NULL);
         SetTimer(hwnd, 2, 50, NULL);
         SetTimer(hwnd, 3, 1, NULL); // 범위공격 전용
         map.SetStyle(&style0);
@@ -341,6 +465,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         menu.Select_Difficulty = false;
         selected_done = false;
         HeartAmount = 0;
+        Attack = false;
         break;
     case WM_PAINT:
     {
@@ -358,16 +483,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         DeleteObject(hBrush);
         //===================================================================
         map.Draw(mdc, hMemDC, MAPBIT, OldBit, 0, 0);
-        if (!GameStart)
+        player.Draw(mdc, PlayerBit, OldBit, PH, PW);
+        if (!GameStart && !GameEnd)
         {
             menu.MenuDraw(mdc);
         }
-        else {
-
+        else if (GameStart){
+            if (player.health <= 0) {
+                Score_Count += player.bossatackpoint;
+                ScoreCal(Score_Count);
+                GameStart = false;
+                GameEnd = true;
+                InvalidateRect(hwnd, NULL, FALSE);  // 화면 갱신
+                break;
+            }
 
             ItemSpawn();
             Heart_Draw(mdc, HeartBit, hBitmap, 1825, 900);
-            player.Draw(mdc, PlayerBit, OldBit, PH, PW);
+            Attack_Charge_Draw(mdc, AttackChargeBit, hBitmap, 50, 25);
             if (spikeManager.GetLevel() == 1) {
                 if (game_start) {
                     spikeManager.Draw(mdc, hMemDC, LV1_rktl, OldBit, LV1_rktlW, LV1_rktlH);
@@ -380,7 +513,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     spikeManager.yong[i].Draw(mdc, hMemDC, spikebitmap, OldBit, SpikeW, SpikeH);
                 }
             }
-            else if (spikeManager.GetLevel() == 2) {
+            else  if (spikeManager.GetLevel() == 2) {
                 if (game_start) {
                     spikeManager.Draw(mdc, hMemDC, rktl, OldBit, rktlW, rktlH);
                 }
@@ -396,7 +529,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 if (game_start) {
                     spikeManager.Draw(mdc, hMemDC, rktl, OldBit, rktlW, rktlH);
                 }
-                boss.Draw(mdc, hMemDC, boss2bitmap, OldBit, BossW2, BossH2);
+                boss.Draw(mdc, hMemDC, boss13, OldBit, bossW13, bossH13);
                 if (ItemSpawned && ItemBIt != nullptr && item.IsAlive()) {
                     item.Draw(mdc, ItemBIt, hBitmap);
                 }
@@ -405,23 +538,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 }
             }
             Stamina_Draw(mdc, StaminaBit, hBitmap, 25, 900);
-            GameRender(mdc, SpikeW, SpikeH);
-
-            // 펜 설정===============================================================
-            HPEN pen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));
-            HPEN oldPen = (HPEN)SelectObject(mdc, pen);
-
-            // 시작점 설정
-            MoveToEx(mdc, 0, 10, NULL);
-
-            // 끝점까지 선 그리기
-            LineTo(mdc, 1920 / 100 * player.health, 10);
-
-            // 정리
-            SelectObject(mdc, oldPen);
-            DeleteObject(pen);
-
+            Score_Count++;
         }
+        else if (GameEnd) {
+            menu.MenuEndDraw(mdc);
+            ScoreDraw(mdc);
+        }
+        GameRender(mdc);
         //===================================================================
         BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
         DeleteDC(mdc);
@@ -446,6 +569,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     GameUpdate(hwnd, timecount);  // 타이머에 의해 게임 업데이트
                 }
                 player.Update(boss);  // 플레이어 업데이트
+                if (Attack) {
+                    if (AttackTimeCount == 15) {
+                        Attack = false;
+                        AttackTimeCount = 0;
+                    }
+                    AttackTimeCount++;
+
+                }
             }
             if (wp == 2) {
                 if (game_start) {
@@ -470,6 +601,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                 InvalidateRect(hwnd, NULL, FALSE);  // 화면 새로 고침
             }
         }
+        else {
+            if (wp == 1) {
+                player.StaminaP = 100;
+                player.Update(boss);
+                InvalidateRect(hwnd, NULL, FALSE);  // 화면 새로 고침
+            }
+        }
+        if (wp == 77) {
+            if (sound1) {
+                sound1count--;
+                if (sound1count == 0) {
+                    mciSendString(TEXT("close sfx"), NULL, 0, NULL);
+                    sound1 = false;
+                }
+            }
+            if (player.attacksound) {
+                player.soundcount--;
+                if (player.soundcount == 0) {
+                    mciSendString(TEXT("close attackboss"), NULL, 0, NULL);
+                    player.attacksound = false;
+                }
+            }
+        }
         break;
     case WM_KEYDOWN:
         if (!player.bounced) {
@@ -478,17 +632,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
                     player.Dash = TRUE;
                     player.speed *= 5.0f;
                     player.SetSpeed(player.speed);
+                    InvalidateRect(hwnd, NULL, FALSE);
                 }
             }
             if (wp == VK_SPACE) {
                 player.speed *= -1;
                 player.SetSpeed(player.speed);
+                InvalidateRect(hwnd, NULL, FALSE);
             }
         }
         if (wp == 81) {
-            boss.health -= 20;
+            if (AttackChargeAmmount == 3) {
+                AttackChargeAmmount = 0;
+                Attack = TRUE;
+                AttackTimeCount = 0;
+                Score_Count += 200;
+                boss.health -= 100;
+                mciSendString(TEXT("open \"res//레이저1.wav\" type waveaudio alias sfx"), NULL, 0, NULL);
+                mciSendString(TEXT("play sfx from 0"), NULL, 0, NULL);
+                sound1 = true;
+                sound1count = 10;
+                InvalidateRect(hwnd, NULL, FALSE);
+            }
         }
-        InvalidateRect(hwnd, NULL, FALSE);
         break;
     case WM_KEYUP:
         if (wp == VK_RETURN && player.Dash) {
@@ -506,14 +672,43 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         if (!GameStart) {
             if (!menu.Select_Difficulty) {
                 if (x<menu.Start.right && x>menu.Start.left && y < menu.Start.bottom && y > menu.Start.top)  menu.Select_Difficulty = true;
-                else if (x<menu.EXIT.right && x>menu.EXIT.left && y < menu.EXIT.bottom && y > menu.EXIT.top) menu.GameExit();
+                else if (x<menu.Start_EXIT.right && x>menu.Start_EXIT.left && y < menu.Start_EXIT.bottom && y > menu.Start_EXIT.top) menu.GameExit();
+            }
+            else if (GameEnd) {
+                if (x<menu.END_EXIT.right && x>menu.END_EXIT.left && y < menu.END_EXIT.bottom && y > menu.END_EXIT.top)  menu.GameExit();
+                else if (x<menu.MENUBUTTON.right && x>menu.MENUBUTTON.left && y < menu.MENUBUTTON.bottom && y > menu.MENUBUTTON.top) {
+                    KillTimer(hwnd, 1);
+                    KillTimer(hwnd, 2);
+                    KillTimer(hwnd, 3);
+                    KillTimer(hwnd, 69);
+
+                    // 게임 상태 완전 리셋
+                    ResetGame();
+
+                    // 타이머 재설정
+                    SetTimer(hwnd, 1, 32, NULL);
+                    SetTimer(hwnd, 2, 50, NULL);
+                    SetTimer(hwnd, 3, 1, NULL);
+                    SetTimer(hwnd, 69, 1000, NULL);
+
+                    // 메뉴 상태로 복귀
+                    GameEnd = false;
+                    GameStart = false;
+                    menu.Select_Difficulty = false;
+                    selected_done = false;
+
+
+                    InvalidateRect(hwnd, NULL, TRUE);  // 화면 갱신
+                }
             }
             else
-            {   
-                if (x<menu.EASY.right && x>menu.EASY.left && y < menu.EASY.bottom && y > menu.EASY.top) { GameDifficulty = easy; selected_done = true; GameStart = true; HeartAmount = 10,spikeManager.SetLevel(1); }
-                else if (x<menu.NORMAL.right && x>menu.NORMAL.left && y < menu.NORMAL.bottom && y > menu.NORMAL.top) { GameDifficulty = normal; selected_done = true; GameStart = true; HeartAmount = 5, spikeManager.SetLevel(2); }
-                else if (x<menu.HARD.right && x>menu.HARD.left && y < menu.HARD.bottom && y > menu.HARD.top) { GameDifficulty = hard; selected_done = true; GameStart = true; HeartAmount = 3, spikeManager.SetLevel(3); }
-                
+            {
+                if (x<menu.EASY.right && x>menu.EASY.left && y < menu.EASY.bottom && y > menu.EASY.top) { GameDifficulty = easy; selected_done = true; GameStart = true; player.health = 10; spikeManager.SetLevel(1); SetTimer(hwnd, 69, 1000, NULL);
+                }
+                else if (x<menu.NORMAL.right && x>menu.NORMAL.left && y < menu.NORMAL.bottom && y > menu.NORMAL.top) { GameDifficulty = normal; selected_done = true; GameStart = true; player.health = 5; spikeManager.SetLevel(3); SetTimer(hwnd, 69, 1000, NULL);
+                }
+                else if (x<menu.HARD.right && x>menu.HARD.left && y < menu.HARD.bottom && y > menu.HARD.top) { GameDifficulty = hard; selected_done = true; GameStart = true; player.health = 3; spikeManager.SetLevel(2); SetTimer(hwnd, 69, 1000, NULL); }
+
                 boss.Init(xx / 2, yy / 2, 100, spikeManager.GetLevel());    // 보스 초기화
             }
             InvalidateRect(hwnd, NULL, FALSE);
@@ -521,6 +716,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp) {
         break;
     }
     case WM_DESTROY:
+
+        mciSendString(TEXT("close bgm"), NULL, 0, NULL);
         KillTimer(hwnd, 1);
         PostQuitMessage(0);
         break;

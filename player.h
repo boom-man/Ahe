@@ -1,5 +1,8 @@
 #pragma once
 #include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 #define xx 1920
 #define yy 1080
 class Boss;
@@ -14,10 +17,12 @@ public:
     bool Dash, bounced;
     int StaminaP, mapMove, bounceTimer, invincibleTimer;
     float speed, anglez, originalspeed;
-    int health;;
+    int health;
     float x, y, centerX,centerY;
     int delay;
     bool invincible;
+    bool attacksound = false;
+    int soundcount, bossatackpoint;
     float GetX() const;
     float GetY() const;
     int GetRadius() const; // 플레이어 크기에 따라 반지름 반환

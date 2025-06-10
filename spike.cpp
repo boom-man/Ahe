@@ -12,6 +12,9 @@ void Spike::Init(HBITMAP Yong[], int w[], int h[],
     spawncount = count;
     cx = -1.0f;
     attack4 = false;
+    if (what == 5) {
+        attack5count = 10;
+    }
     // 방향 벡터 정규화
     float length = sqrt(dirX * dirX + dirY * dirY);
     if (length != 0.0f) {
@@ -42,16 +45,20 @@ void Spike::Update(const Boss& boss,Player& player,int i) {
             spawncount--;
             return; // 대기 중이면 움직이지 않음
         }
+        if (!sound) {
+            sound = true;
+        }
         if (check(player) && !player.invincible){
             if (player.delay <= 0) {
                 player.health--;
-                player.delay = 10;
+                player.delay = 50;
             }
         }
         if (attack == 0 || attack == 1 || attack == 4) {
             if (x < 0 || x > 1920 || y < 0 || y > 1080) {
                 attack = -1;
                 attack4 = false;
+                sound = false;
                 return;
             }
             if (attack == 1) {
@@ -68,7 +75,6 @@ void Spike::Update(const Boss& boss,Player& player,int i) {
                 dy *= -3;
                 attack4= true;
             }
-            bitmapcount = (bitmapcount + 1) % i;
             x += dx * speed;
             y += dy * speed;
         }
@@ -93,17 +99,14 @@ void Spike::Update(const Boss& boss,Player& player,int i) {
             x = centerX + cos(angle) * radius;
             y = centerY + sin(angle) * radius;
 
-            bitmapcount = (bitmapcount + 1) % i;
-
             during--;
         }
+        bitmapcount = (bitmapcount + 1) % i;
     }
 }
 void Spike::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], int h[]) {
     OldBit[2] = (HBITMAP)SelectObject(hMemDC, Yong[bitmapcount]);
-    for (int i = 0; i < 20; i++) {
-        TransparentBlt(hdc, x - 15, y - 15, 30, 30, hMemDC, 0, 0, w[bitmapcount], h[bitmapcount], RGB(0, 0, 0));
-    }
+    TransparentBlt(hdc, x - 15, y - 15, 30, 30, hMemDC, 0, 0, w[bitmapcount], h[bitmapcount], RGB(0, 0, 0));
 }
 
 bool Spike::check(Player& player) {

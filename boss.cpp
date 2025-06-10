@@ -58,7 +58,7 @@ void Boss::Update(const Player& player, int timecount) {
             int iy = static_cast<int>(sin(angle) * radius + centerY);
             x = ix;
             y = iy;
-            groggytime = 30;
+            groggytime = 100;
             qcenterX = centerX;
             qcenterY = centerY;
         }
@@ -122,13 +122,10 @@ void Boss::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], 
             SelectObject(tempDC, oldTempBmp); DeleteObject(tempBmp); DeleteDC(tempDC);
             SelectObject(rotDC, oldRotBmp); DeleteObject(rotBmp); DeleteDC(rotDC);
         }
-        else if (Level == 2) {
+        else if (Level == 2 || Level == 3) {
             OldBit[2] = (HBITMAP)SelectObject(hMemDC, Yong[0]);
             TransparentBlt(hdc, x - w[0] / 2, y - h[0] / 2, w[0], h[0], hMemDC, 0, 0, w[0], h[0], RGB(255, 255, 255));
             SelectObject(hMemDC, OldBit[2]);
-        }
-        else {
-
         }
     }
     else {
@@ -177,7 +174,7 @@ void Boss::Draw(HDC hdc, HDC hMemDC, HBITMAP Yong[], HBITMAP OldBit[], int w[], 
             SelectObject(tempDC, oldTempBmp); DeleteObject(tempBmp); DeleteDC(tempDC);
             SelectObject(rotDC, oldRotBmp); DeleteObject(rotBmp); DeleteDC(rotDC);
         }
-        else if (Level == 2) {
+        else if (Level == 2 || Level == 3) {
             OldBit[2] = (HBITMAP)SelectObject(hMemDC, Yong[1]);
             TransparentBlt(hdc, x - 50, y - 50, w[1], h[1], hMemDC, 0, 0, w[1], h[1], RGB(255, 255, 255));
             SelectObject(hMemDC, OldBit[2]);
@@ -201,6 +198,13 @@ void Boss::Attack(const Player& player,int timecount) {
             }
             break;
         case PatternSet::LV1Combo2:
+            if (Level == 3) {
+                FuckingGood(player);
+            }
+            else {
+                LoopingMove();
+            }
+            break;
         case PatternSet::LV1Combo3:
         case PatternSet::LV1Combo4:
         case PatternSet::Level2_Combo1:

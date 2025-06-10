@@ -15,6 +15,7 @@ enum class PatternSet {
     Level2_Combo1, // ¿Ï
     Level2_OrbitMixed, // ¿Ï
     Level2_Combo4 // ¿Ï
+
 };
 class Boss {
 public:
